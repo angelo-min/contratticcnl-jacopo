@@ -5,84 +5,84 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Editorial palette — warm ivory, dark ink, deep crimson accent */
-  --background: #FAF8F5;
-  --foreground: #1C1917;
-  --card: #FFFFFF;
-  --card-foreground: #1C1917;
-  --popover: #FFFFFF;
-  --popover-foreground: #1C1917;
-  --primary: #9B2335;
-  --primary-foreground: #FEFCFB;
-  --secondary: #F5F0EB;
-  --secondary-foreground: #1C1917;
-  --muted: #F0EBE4;
-  --muted-foreground: #78716C;
-  --accent: #F5F0EB;
-  --accent-foreground: #1C1917;
-  --destructive: #B91C1C;
-  --destructive-foreground: #FEFCFB;
-  --border: #E7E0D8;
-  --input: #E7E0D8;
-  --ring: #9B2335;
-  --chart-1: #9B2335;
-  --chart-2: #D4A574;
-  --chart-3: #57534E;
-  --chart-4: #B8860B;
-  --chart-5: #6D5D4B;
-  --radius: 0.375rem;
-  --sidebar: #F5F0EB;
-  --sidebar-foreground: #1C1917;
-  --sidebar-primary: #9B2335;
-  --sidebar-primary-foreground: #FEFCFB;
-  --sidebar-accent: #F0EBE4;
-  --sidebar-accent-foreground: #1C1917;
-  --sidebar-border: #E7E0D8;
-  --sidebar-ring: #9B2335;
+  /* Architectural Atelier — Plaster, Charcoal, Terracotta */
+  --background: #EAE6DF;
+  --foreground: #1C1B1A;
+  --card: #F4F1ED;
+  --card-foreground: #1C1B1A;
+  --popover: #F4F1ED;
+  --popover-foreground: #1C1B1A;
+  --primary: #A84B2B;
+  --primary-foreground: #EAE6DF;
+  --secondary: #D8D2C9;
+  --secondary-foreground: #1C1B1A;
+  --muted: #D8D2C9;
+  --muted-foreground: #6A6662;
+  --accent: #D8D2C9;
+  --accent-foreground: #1C1B1A;
+  --destructive: #8B0000;
+  --destructive-foreground: #EAE6DF;
+  --border: #C8C2BA;
+  --input: #C8C2BA;
+  --ring: #A84B2B;
+  --chart-1: #A84B2B;
+  --chart-2: #1C1B1A;
+  --chart-3: #D8D2C9;
+  --chart-4: #6A6662;
+  --chart-5: #C8C2BA;
+  --radius: 1.25rem; /* Soft, welcoming curves */
+  --sidebar: #EAE6DF;
+  --sidebar-foreground: #1C1B1A;
+  --sidebar-primary: #A84B2B;
+  --sidebar-primary-foreground: #EAE6DF;
+  --sidebar-accent: #D8D2C9;
+  --sidebar-accent-foreground: #1C1B1A;
+  --sidebar-border: #C8C2BA;
+  --sidebar-ring: #A84B2B;
   
   /* Custom status colors — refined and muted */
-  --status-vigente: #166534;
-  --status-in-rinnovo: #B45309;
-  --status-scaduto: #78716C;
+  --status-vigente: #365C46; /* Moss */
+  --status-in-rinnovo: #A84B2B; /* Terracotta */
+  --status-scaduto: #6A6662;
 }
 
 .dark {
-  --background: #1C1917;
-  --foreground: #F5F0EB;
-  --card: #231F1C;
-  --card-foreground: #F5F0EB;
-  --popover: #231F1C;
-  --popover-foreground: #F5F0EB;
-  --primary: #E8A0A0;
-  --primary-foreground: #1C1917;
-  --secondary: #2D2926;
-  --secondary-foreground: #F5F0EB;
-  --muted: #2D2926;
-  --muted-foreground: #A8A29E;
-  --accent: #2D2926;
-  --accent-foreground: #F5F0EB;
+  --background: #1C1B1A;
+  --foreground: #EAE6DF;
+  --card: #282625;
+  --card-foreground: #EAE6DF;
+  --popover: #282625;
+  --popover-foreground: #EAE6DF;
+  --primary: #B85938;
+  --primary-foreground: #1C1B1A;
+  --secondary: #383533;
+  --secondary-foreground: #EAE6DF;
+  --muted: #383533;
+  --muted-foreground: #9B9691;
+  --accent: #383533;
+  --accent-foreground: #EAE6DF;
   --destructive: #991B1B;
   --destructive-foreground: #FCA5A5;
-  --border: #3D3835;
-  --input: #3D3835;
-  --ring: #E8A0A0;
-  --chart-1: #E8A0A0;
-  --chart-2: #D4A574;
-  --chart-3: #A8A29E;
-  --chart-4: #D4A574;
-  --chart-5: #A8A29E;
-  --sidebar: #231F1C;
-  --sidebar-foreground: #F5F0EB;
-  --sidebar-primary: #E8A0A0;
-  --sidebar-primary-foreground: #1C1917;
-  --sidebar-accent: #2D2926;
-  --sidebar-accent-foreground: #F5F0EB;
-  --sidebar-border: #3D3835;
-  --sidebar-ring: #E8A0A0;
+  --border: #4A4644;
+  --input: #4A4644;
+  --ring: #B85938;
+  --chart-1: #B85938;
+  --chart-2: #EAE6DF;
+  --chart-3: #4A4644;
+  --chart-4: #383533;
+  --chart-5: #9B9691;
+  --sidebar: #1C1B1A;
+  --sidebar-foreground: #EAE6DF;
+  --sidebar-primary: #B85938;
+  --sidebar-primary-foreground: #1C1B1A;
+  --sidebar-accent: #383533;
+  --sidebar-accent-foreground: #EAE6DF;
+  --sidebar-border: #4A4644;
+  --sidebar-ring: #B85938;
 
-  --status-vigente: #4ADE80;
-  --status-in-rinnovo: #FBBF24;
-  --status-scaduto: #A8A29E;
+  --status-vigente: #4E8761;
+  --status-in-rinnovo: #D47556;
+  --status-scaduto: #9B9691;
 }
 
 @theme inline {

@@ -11,3 +11,6 @@ node_modules/
 
 # WordPress XML export (too large for git)
 *.xml
+
+# Excel data files (private)
+*.xlsx
