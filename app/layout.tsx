@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Instrument_Serif, Manrope } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { DownloadInterstitialProvider } from '@/components/ads/download-interstitial'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -65,7 +66,9 @@ export default function RootLayout({
             <rect width="100%" height="100%" filter="url(#noise)" />
           </svg>
         </div>
-        {children}
+        <DownloadInterstitialProvider>
+          {children}
+        </DownloadInterstitialProvider>
         <Analytics />
       </body>
     </html>

@@ -12,7 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { FileText, Search, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
+import { PdfDownloadLink } from '@/components/ads/pdf-download-link'
 import { getAllAccordi } from '@/data/db'
 import type { AccordoRecord } from '@/types/ccnl'
 
@@ -186,15 +187,10 @@ export function AccordiPageContent() {
                       {accordo.data_scadenza && ` — Scadenza: ${formatDate(accordo.data_scadenza)}`}
                     </p>
                   </div>
-                  <a
+                  <PdfDownloadLink
                     href={accordo.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex shrink-0 items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <FileText className="h-4 w-4" />
-                    PDF
-                  </a>
+                    title={accordo.titolo}
+                  />
                 </CardContent>
               </Card>
             ))}

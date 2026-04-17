@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { FileText } from 'lucide-react'
+import { PdfDownloadLink } from '@/components/ads/pdf-download-link'
 import type { CCNL } from '@/types/ccnl'
 import { getAccordiByccnlId } from '@/data/db'
 
@@ -138,15 +138,11 @@ export function CCNLTabs({ ccnl }: CCNLTabsProps) {
                           {accordo.data_scadenza && ` — Scadenza: ${formatDate(accordo.data_scadenza)}`}
                         </p>
                       </div>
-                      <a
+                      <PdfDownloadLink
                         href={accordo.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex shrink-0 items-center gap-1 text-sm text-primary hover:underline"
-                      >
-                        <FileText className="h-4 w-4" />
-                        PDF
-                      </a>
+                        title={accordo.titolo}
+                        variant="inline"
+                      />
                     </div>
                   </div>
                 ))}
