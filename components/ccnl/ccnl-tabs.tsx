@@ -37,16 +37,16 @@ export function CCNLTabs({ ccnl }: CCNLTabsProps) {
 
   return (
     <Tabs defaultValue="info" className="w-full">
-      <TabsList className="w-full justify-start border-b bg-transparent p-0 overflow-x-auto">
+      <TabsList className="h-auto w-full justify-start rounded-none border-b bg-transparent p-0 overflow-x-auto">
         <TabsTrigger
           value="info"
-          className="rounded-none border-b-2 border-transparent px-6 py-3 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+          className="rounded-none border-0 border-b-2 border-transparent px-6 py-3 shadow-none data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
           Informazioni
         </TabsTrigger>
         <TabsTrigger
           value="accordi"
-          className="rounded-none border-b-2 border-transparent px-6 py-3 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+          className="rounded-none border-0 border-b-2 border-transparent px-6 py-3 shadow-none data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
           Accordi ({accordi.length})
         </TabsTrigger>

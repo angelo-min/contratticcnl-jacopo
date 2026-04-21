@@ -24,6 +24,16 @@ export const metadata: Metadata = {
   description: 'Archivio gratuito di oltre 1.000 CCNL e 2.000 accordi di rinnovo. Trova il tuo contratto collettivo nazionale del lavoro, sempre aggiornato.',
   keywords: 'CCNL, contratti collettivi, lavoro, rinnovo contratti, metalmeccanico, commercio, edilizia',
   authors: [{ name: 'ContrattiCCNL.it' }],
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
   icons: {
     icon: [
       {
