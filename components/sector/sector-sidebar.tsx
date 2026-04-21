@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ExternalLink } from 'lucide-react'
+import { SectorIcon } from '@/components/sector/sector-icon'
 import { macrosettori } from '@/data/db'
 
 interface SectorSidebarProps {
@@ -31,7 +32,7 @@ export function SectorSidebar({ currentSlug }: SectorSidebarProps) {
               href={`/settore/${sector.slug}`}
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
-              <span className="text-lg">{sector.icona}</span>
+              <SectorIcon name={sector.icona} className="h-5 w-5 shrink-0 text-primary" />
               <span>{sector.nome}</span>
             </Link>
           ))}

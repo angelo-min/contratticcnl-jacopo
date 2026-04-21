@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
+import { SectorIcon } from '@/components/sector/sector-icon'
 import type { Macrosettore } from '@/types/ccnl'
 
 interface SectorCardProps {
@@ -11,9 +12,7 @@ export function SectorCard({ sector }: SectorCardProps) {
     <Link href={`/settore/${sector.slug}`}>
       <Card className="group h-full transition-all hover:border-primary/30 hover:shadow-md">
         <CardContent className="flex flex-col items-center p-6 text-center">
-          <span className="text-4xl" role="img" aria-label={sector.nome}>
-            {sector.icona}
-          </span>
+          <SectorIcon name={sector.icona} className="h-10 w-10 text-primary" />
           <h3 className="mt-3 font-heading text-sm font-bold text-foreground transition-colors group-hover:text-primary sm:text-base">
             {sector.nome}
           </h3>

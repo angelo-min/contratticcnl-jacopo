@@ -4,6 +4,7 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { CCNLCard } from '@/components/ccnl-card'
 import { SectorSidebar } from '@/components/sector/sector-sidebar'
+import { SectorIcon } from '@/components/sector/sector-icon'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -83,9 +84,7 @@ export default async function SectorPage({ params }: SectorPageProps) {
             </Breadcrumb>
 
             <div className="mt-6 flex items-start gap-4">
-              <span className="text-5xl" role="img" aria-label={sector.nome}>
-                {sector.icona}
-              </span>
+              <SectorIcon name={sector.icona} className="h-12 w-12 shrink-0 text-primary" />
               <div>
                 <h1 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
                   {sector.nome}
