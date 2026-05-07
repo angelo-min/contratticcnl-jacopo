@@ -124,6 +124,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-status-vigente: var(--status-vigente);
+  --color-status-in-rinnovo: var(--status-in-rinnovo);
+  --color-status-scaduto: var(--status-scaduto);
 }
 
 @layer base {
@@ -133,4 +136,118 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Article typography — used by RichContent instead of @tailwindcss/typography */
+.prose-content {
+  color: var(--foreground);
+  line-height: 1.75;
+  max-width: none;
+}
+
+.prose-content h2,
+.prose-content h3,
+.prose-content h4 {
+  font-family: var(--font-heading, Georgia, serif);
+  font-weight: 700;
+  scroll-margin-top: 6rem;
+}
+
+.prose-content h2 {
+  font-size: 1.375rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.prose-content p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.prose-content ul,
+.prose-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose-content ul {
+  list-style-type: disc;
+}
+
+.prose-content ol {
+  list-style-type: decimal;
+}
+
+.prose-content li {
+  margin-bottom: 0.25rem;
+}
+
+.prose-content li > p {
+  margin-bottom: 0.25rem;
+}
+
+.prose-content a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.prose-content a:hover {
+  text-decoration: underline;
+}
+
+.prose-content strong {
+  font-weight: 700;
+}
+
+.prose-content em {
+  font-style: italic;
+}
+
+.prose-content blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted-foreground);
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.prose-content th,
+.prose-content td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose-content th {
+  background-color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+.prose-content tr:nth-child(even) td {
+  background-color: color-mix(in srgb, var(--muted) 40%, transparent);
 }
