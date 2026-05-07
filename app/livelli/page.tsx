@@ -2,22 +2,22 @@ import Link from 'next/link'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { Card, CardContent } from '@/components/ui/card'
-import { TableProperties, ArrowRight } from 'lucide-react'
+import { Layers, ArrowRight } from 'lucide-react'
 import { getAllGuideSlugs, getCCNLGuide } from '@/data/db'
 import type { Metadata } from 'next'
 
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Tabelle retributive CCNL — Archivio minimi salariali | ContrattiCCNL.it',
+  title: 'Livelli e inquadramento CCNL — Classificazione del personale | ContrattiCCNL.it',
   description:
-    'Archivio delle tabelle retributive dei contratti collettivi nazionali. Minimi tabellari per livello, scatti di anzianità e decorrenze aggiornate.',
+    'Livelli, mansioni e classificazione del personale per ciascun contratto collettivo nazionale. Consulta i livelli del CCNL di tuo interesse.',
 }
 
-export default function TabelleRetributiveIndexPage() {
+export default function LivelliIndexPage() {
   const guides = getAllGuideSlugs()
     .map((slug) => getCCNLGuide(slug))
-    .filter((g): g is NonNullable<typeof g> => g != null && !!g.tabelle_html)
+    .filter((g): g is NonNullable<typeof g> => g != null && !!g.livelli_html)
     .sort((a, b) => a.info.titolo.localeCompare(b.info.titolo, 'it'))
 
   return (
@@ -28,11 +28,11 @@ export default function TabelleRetributiveIndexPage() {
           <div className="absolute left-10 top-0 -z-10 h-[300px] w-[300px] rounded-full bg-primary/5 blur-[100px]" />
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <h1 className="max-w-4xl font-heading text-4xl font-normal leading-tight tracking-[-0.02em] text-foreground sm:text-6xl lg:text-7xl">
-              Tabelle retributive
+              Livelli e inquadramento
             </h1>
             <p className="mt-6 max-w-2xl text-base font-medium text-muted-foreground">
-              Archivio dei minimi tabellari per livello, scatti di anzianità e decorrenze dei
-              contratti collettivi nazionali. Consulta la tabella del CCNL di tuo interesse.
+              Livelli, mansioni e classificazione del personale dei contratti collettivi nazionali.
+              Consulta l'inquadramento del CCNL di tuo interesse.
             </p>
           </div>
         </div>
@@ -42,12 +42,12 @@ export default function TabelleRetributiveIndexPage() {
             {guides.map((g) => (
               <Link
                 key={g.slug}
-                href={`/${g.slug}/tabelle-retributive`}
+                href={`/${g.slug}/livelli`}
                 className="group transition-opacity"
               >
                 <Card className="h-full transition-all hover:border-primary/30 hover:shadow-md">
                   <CardContent className="flex h-full flex-col p-6">
-                    <TableProperties
+                    <Layers
                       className="h-8 w-8 shrink-0 text-primary"
                       strokeWidth={1.5}
                       aria-hidden="true"

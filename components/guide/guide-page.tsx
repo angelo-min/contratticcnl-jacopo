@@ -64,7 +64,7 @@ export function GuidePage({ guide }: GuidePageProps) {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="text-foreground">{guide.info.titolo}</BreadcrumbPage>
+                  <BreadcrumbPage className="text-foreground">{guide.title}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

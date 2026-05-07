@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { SearchBar } from '@/components/search-bar'
 import { Badge } from '@/components/ui/badge'
 
-const quickTags = [
-  { label: 'Metalmeccanico', query: 'metalmeccanico' },
-  { label: 'Commercio', query: 'commercio' },
-  { label: 'Edilizia', query: 'edilizia' },
-  { label: 'Sanità', query: 'sanità' },
-  { label: 'Bancario', query: 'bancario' },
+const popularContracts = [
+  { label: 'Metalmeccanici', href: '/metalmeccanici' },
+  { label: 'Commercio', href: '/commercio' },
+  { label: 'Sanità', href: '/sanita' },
+  { label: 'Bancari', href: '/bancari' },
+  { label: 'Turismo', href: '/turismo' },
 ]
 
 export function HeroSection() {
@@ -40,15 +40,15 @@ export function HeroSection() {
             </div>
 
             <div className="mt-6">
-              <span className="mb-3 block text-xs font-bold uppercase tracking-widest text-muted-foreground">Settori più cercati</span>
+              <span className="mb-3 block text-xs font-bold uppercase tracking-widest text-muted-foreground">Contratti più cercati</span>
               <div className="flex flex-wrap gap-2">
-                {quickTags.map((tag) => (
-                  <Link key={tag.query} href={`/contratti-ccnl?q=${encodeURIComponent(tag.query)}`}>
+                {popularContracts.map((c) => (
+                  <Link key={c.href} href={c.href}>
                     <Badge
                       variant="secondary"
                       className="cursor-pointer rounded-xl border border-border/50 bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground hover:shadow-md"
                     >
-                      {tag.label}
+                      {c.label}
                     </Badge>
                   </Link>
                 ))}

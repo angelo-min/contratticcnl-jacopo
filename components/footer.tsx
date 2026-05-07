@@ -1,121 +1,114 @@
 import Link from 'next/link'
-import { macrosettori } from '@/data/db'
+
+const TOP_CONTRACTS = [
+  { name: 'CCNL metalmeccanici', href: '/metalmeccanici' },
+  { name: 'CCNL commercio', href: '/commercio' },
+  { name: 'CCNL scuola', href: '/scuola' },
+  { name: 'CCNL turismo', href: '/turismo' },
+]
+
+const RESOURCES = [
+  { name: 'Settori CNEL', href: '/settori' },
+  { name: 'CCNL in pdf', href: '/pdf' },
+  { name: 'Accordi', href: '/accordi' },
+  { name: 'Articoli', href: '/articoli' },
+]
+
+const INFO = [
+  { name: 'Contatti', href: '/contatti' },
+  { name: 'Disclaimer', href: '/disclaimer' },
+  { name: 'Privacy policy', href: '/privacy-policy' },
+  { name: 'Cookie policy', href: '/cookie-policy' },
+]
 
 export function Footer() {
-  const topSectors = macrosettori.slice(0, 6)
-
   return (
     <footer className="mt-20 bg-foreground text-background rounded-t-[3rem] px-4 pt-20 pb-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
-          
-          {/* Logo and description */}
+
+          {/* 1. Logo + descrizione */}
           <div className="lg:col-span-5 flex flex-col items-start pr-8">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary transition-transform group-hover:scale-105">
-                <span className="font-heading text-2xl font-bold text-primary-foreground leading-none">C</span>
-              </div>
+              <img
+                src="/icon-dark-32x32.png"
+                alt=""
+                width={48}
+                height={48}
+                className="h-12 w-12 transition-transform group-hover:scale-105"
+              />
               <span className="font-heading text-3xl font-normal text-background">ContrattiCCNL</span>
             </Link>
             <p className="mt-8 max-w-md text-base leading-relaxed text-muted">
-              Archivio gratuito e sempre aggiornato di Contratti Collettivi Nazionali del Lavoro italiani. Un digital instrument progettato per l'eccellenza.
+              Archivio gratuito e sempre aggiornato dei contratti collettivi nazionali del lavoro italiani depositati al CNEL.
             </p>
-            
-            <div className="mt-10 flex items-center gap-3 rounded-full bg-background/10 px-4 py-2 border border-background/20 backdrop-blur-sm">
-              <span className="inline-flex rounded-full h-2 w-2 bg-background/60"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-background">Dati aggiornati al 04/2026</span>
-            </div>
           </div>
 
-          {/* Settori */}
+          {/* 2. Contratti più letti */}
           <div className="lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest text-background/60 mb-6">
-              Settori Primari
+              Contratti più letti
             </h3>
             <ul className="space-y-4">
-              {topSectors.map((settore) => (
-                <li key={settore.slug}>
+              {TOP_CONTRACTS.map((c) => (
+                <li key={c.href}>
                   <Link
-                    href={`/settore/${settore.slug}`}
+                    href={c.href}
                     className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4"
                   >
-                    {settore.nome}
+                    {c.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Risorse */}
+          {/* 3. Risorse */}
           <div className="lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest text-background/60 mb-6">
               Risorse
             </h3>
             <ul className="space-y-4">
-              <li>
-                <Link href="/contratti-ccnl" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Catalogo CCNL
-                </Link>
-              </li>
-              <li>
-                <Link href="/accordi" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Accordi Integrativi
-                </Link>
-              </li>
-              <li>
-                <Link href="/articoli" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Archivio Articoli
-                </Link>
-              </li>
-              <li>
-                <Link href="/pdf" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Download PDF
-                </Link>
-              </li>
-              <li>
-                <a href="https://www.cnel.it/Archivio-Contratti" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Portale CNEL ↗
-                </a>
-              </li>
+              {RESOURCES.map((r) => (
+                <li key={r.href}>
+                  <Link
+                    href={r.href}
+                    className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4"
+                  >
+                    {r.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Info */}
+          {/* 4. Info */}
           <div className="lg:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-widest text-background/60 mb-6">
-              Informazioni
+              Info
             </h3>
-            <ul className="space-y-4 flex flex-col items-start">
-              <li>
-                <Link href="/contatti" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Contatti e Supporto
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy-policy" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/cookie-policy" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Cookie Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/disclaimer" className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4">
-                  Disclaimer Legale
-                </Link>
-              </li>
+            <ul className="space-y-4">
+              {INFO.map((i) => (
+                <li key={i.href}>
+                  <Link
+                    href={i.href}
+                    className="text-sm font-medium text-background/90 transition-colors hover:text-primary hover:underline underline-offset-4"
+                  >
+                    {i.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="mt-20 border-t border-background/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-medium text-background/60 uppercase tracking-widest">
-            © {new Date().getFullYear()} ContrattiCCNL. Tutti i diritti riservati.
+        {/* Linea di fondo */}
+        <div className="mt-20 border-t border-background/20 pt-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs font-medium text-background/60">
+            Dati aggiornati al 2026 — Fonte ufficiale: CNEL (Contratti collettivi nazionali del lavoro)
           </p>
-          <p className="text-xs font-medium text-background/60 uppercase tracking-widest">
-            Dati CNEL Aggiornati
+          <p className="text-xs font-medium text-background/40">
+            © {new Date().getFullYear()} ContrattiCCNL
           </p>
         </div>
       </div>

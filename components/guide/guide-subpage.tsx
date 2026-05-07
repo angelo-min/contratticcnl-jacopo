@@ -23,32 +23,37 @@ export function GuideSubpage({ guide, title, contentHtml, currentSection }: Guid
   return (
     <>
       {/* Header */}
-      <div className="border-b border-border bg-card py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href={`/${guide.slug}`}>{guide.info.titolo}</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+      <div className="relative border-b border-border/50 bg-background pb-16 pt-32 overflow-hidden">
+        {/* Subtle accent blur */}
+        <div className="absolute left-10 top-0 -z-10 h-[300px] w-[300px] rounded-full bg-primary/5 blur-[100px]" />
 
-          <h1 className="mt-6 font-heading text-3xl font-bold text-foreground sm:text-4xl">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="mb-8">
+            <Breadcrumb>
+              <BreadcrumbList className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href={`/${guide.slug}`} className="hover:text-primary transition-colors">{guide.title}</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-foreground">{title}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+
+          <h1 className="max-w-4xl font-heading text-4xl font-normal leading-tight tracking-[-0.02em] text-foreground sm:text-6xl lg:text-7xl">
             {title}
           </h1>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-6 max-w-2xl text-base font-medium text-muted-foreground">
             {guide.info.titolo}
           </p>
         </div>

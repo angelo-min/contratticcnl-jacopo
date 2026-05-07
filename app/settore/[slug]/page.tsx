@@ -61,7 +61,7 @@ export default async function SectorPage({ params }: SectorPageProps) {
       <Header />
       <main className="flex-1">
         {/* Header section */}
-        <div className="border-b border-border bg-card py-8">
+        <div className="border-b border-border bg-card pb-8 pt-28">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Breadcrumb>
               <BreadcrumbList>

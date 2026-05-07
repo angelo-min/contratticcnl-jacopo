@@ -32,7 +32,7 @@ export function CCNLHeader({ ccnl }: CCNLHeaderProps) {
           { name: ccnl.nome, href: `/ccnl/${ccnl.slug}` },
         ]}
       />
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pb-6 pt-28 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <Breadcrumb>
           <BreadcrumbList>
