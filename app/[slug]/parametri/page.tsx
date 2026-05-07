@@ -3,7 +3,6 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { GuideSubpage } from '@/components/guide/guide-subpage'
 import { getCCNLGuide } from '@/data/db'
-import { resolveYoastTemplate } from '@/lib/seo'
 import type { Metadata } from 'next'
 
 export const revalidate = 86400
@@ -16,23 +15,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const guide = getCCNLGuide(slug)
 
-  if (!guide) {
+  if (!guide || !guide.parametri_html) {
     return { title: 'Pagina non trovata | ContrattiCCNL.it' }
   }
 
-  const title = guide.livelli_title || `Livelli e mansioni — ${guide.info.titolo}`
-
   return {
-    title: `${title} | ContrattiCCNL.it`,
-    description: `Livelli, mansioni e classificazione del personale del ${guide.info.titolo}. Aggiornato al ${new Date().getFullYear()}.`,
+    title: `Parametri — ${guide.info.titolo} | ContrattiCCNL.it`,
+    description: `Parametri e classificazione del personale del ${guide.info.titolo}. Aggiornato al ${new Date().getFullYear()}.`,
   }
 }
 
-export default async function LivelliPage({ params }: Props) {
+export default async function ParametriPage({ params }: Props) {
   const { slug } = await params
   const guide = getCCNLGuide(slug)
 
-  if (!guide || !guide.livelli_html) {
+  if (!guide || !guide.parametri_html) {
     notFound()
   }
 
@@ -42,9 +39,9 @@ export default async function LivelliPage({ params }: Props) {
       <main className="flex-1">
         <GuideSubpage
           guide={guide}
-          title={guide.livelli_title || 'Livelli e mansioni'}
-          contentHtml={guide.livelli_html}
-          currentSection="livelli"
+          title="Parametri"
+          contentHtml={guide.parametri_html}
+          currentSection="parametri"
         />
       </main>
       <Footer />

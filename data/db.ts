@@ -6,22 +6,31 @@ import type {
   PostRecord,
   CCNLGuideContent,
   Macrosettore,
-  TabellaRetributiva,
 } from '@/types/ccnl'
 
 import ccnlCatalogRaw from './xml-export/ccnl-catalog.json'
 import accordiRaw from './xml-export/accordi.json'
 import blogPostsRaw from './xml-export/blog-posts.json'
 
-// Guide editoriali — importate staticamente (5 file)
+// Guide editoriali — 18 contratti
+import guideAgricolturaFlorovivaisti from './xml-export/ccnl-guide/agricoltura-florovivaisti.json'
+import guideAgricolturaImpiegati from './xml-export/ccnl-guide/agricoltura-impiegati.json'
+import guideAutoferrotranvieri from './xml-export/ccnl-guide/autoferrotranvieri.json'
+import guideAutoscuole from './xml-export/ccnl-guide/autoscuole.json'
+import guideBancari from './xml-export/ccnl-guide/bancari.json'
 import guideCommercio from './xml-export/ccnl-guide/commercio.json'
-import guideVigilanza from './xml-export/ccnl-guide/vigilanza-privata.json'
-import guideMetalmeccanici from './xml-export/ccnl-guide/metalmeccanici.json'
-import guideEnergia from './xml-export/ccnl-guide/energia-petrolio.json'
+import guideElettrico from './xml-export/ccnl-guide/elettrico.json'
+import guideEnergiaPetrolio from './xml-export/ccnl-guide/energia-petrolio.json'
+import guideEntiPubblici from './xml-export/ccnl-guide/enti-pubblici.json'
+import guideGommaPlastica from './xml-export/ccnl-guide/gomma-plastica.json'
 import guideLavoroDomestico from './xml-export/ccnl-guide/lavoro-domestico.json'
-
-// Tabelle retributive strutturate (per ora solo Metalmeccanici)
-import tabellaMetalmeccanici from './xml-export/tabelle-retributive/metalmeccanici.json'
+import guideMetalmeccanici from './xml-export/ccnl-guide/metalmeccanici.json'
+import guideMultiservizi from './xml-export/ccnl-guide/multiservizi.json'
+import guideSanita from './xml-export/ccnl-guide/sanita.json'
+import guideStudiProfessionali from './xml-export/ccnl-guide/studi-professionali.json'
+import guideTelecomunicazioni from './xml-export/ccnl-guide/telecomunicazioni.json'
+import guideTurismo from './xml-export/ccnl-guide/turismo.json'
+import guideVigilanzaPrivata from './xml-export/ccnl-guide/vigilanza-privata.json'
 
 // ---------------------------------------------------------------------------
 // Raw data
@@ -32,11 +41,24 @@ const accordi = accordiRaw as AccordoRecord[]
 const blogPosts = blogPostsRaw as PostRecord[]
 
 const guidesMap: Record<string, CCNLGuideContent> = {
-  commercio: guideCommercio as unknown as CCNLGuideContent,
-  'vigilanza-privata': guideVigilanza as unknown as CCNLGuideContent,
-  metalmeccanici: guideMetalmeccanici as unknown as CCNLGuideContent,
-  'energia-petrolio': guideEnergia as unknown as CCNLGuideContent,
-  'lavoro-domestico': guideLavoroDomestico as unknown as CCNLGuideContent,
+  'agricoltura-florovivaisti': guideAgricolturaFlorovivaisti as unknown as CCNLGuideContent,
+  'agricoltura-impiegati':     guideAgricolturaImpiegati as unknown as CCNLGuideContent,
+  'autoferrotranvieri':        guideAutoferrotranvieri as unknown as CCNLGuideContent,
+  'autoscuole':                guideAutoscuole as unknown as CCNLGuideContent,
+  'bancari':                   guideBancari as unknown as CCNLGuideContent,
+  'commercio':                 guideCommercio as unknown as CCNLGuideContent,
+  'elettrico':                 guideElettrico as unknown as CCNLGuideContent,
+  'energia-petrolio':          guideEnergiaPetrolio as unknown as CCNLGuideContent,
+  'enti-pubblici':             guideEntiPubblici as unknown as CCNLGuideContent,
+  'gomma-plastica':            guideGommaPlastica as unknown as CCNLGuideContent,
+  'lavoro-domestico':          guideLavoroDomestico as unknown as CCNLGuideContent,
+  'metalmeccanici':            guideMetalmeccanici as unknown as CCNLGuideContent,
+  'multiservizi':              guideMultiservizi as unknown as CCNLGuideContent,
+  'sanita':                    guideSanita as unknown as CCNLGuideContent,
+  'studi-professionali':       guideStudiProfessionali as unknown as CCNLGuideContent,
+  'telecomunicazioni':         guideTelecomunicazioni as unknown as CCNLGuideContent,
+  'turismo':                   guideTurismo as unknown as CCNLGuideContent,
+  'vigilanza-privata':         guideVigilanzaPrivata as unknown as CCNLGuideContent,
 }
 
 // ---------------------------------------------------------------------------
@@ -64,7 +86,6 @@ const macrosettoriConfig: Record<string, { nome: string; icona: string; descrizi
   T: { nome: 'Scuola Pubblica', icona: 'GraduationCap', descrizione: 'Istruzione pubblica' },
 }
 
-// Calcola conteggi reali dai 1032 record
 function buildMacrosettori(): Macrosettore[] {
   const counts: Record<string, number> = {}
   for (const record of ccnlCatalog) {
@@ -90,7 +111,6 @@ function buildMacrosettori(): Macrosettore[] {
 
 export const macrosettori: Macrosettore[] = buildMacrosettori()
 
-// Mappe veloci
 const macrosettoreByCod = new Map(macrosettori.map((m) => [m.cod, m]))
 const macrosettoreBySlug = new Map(macrosettori.map((m) => [m.slug, m]))
 
@@ -139,7 +159,6 @@ function normalizeCCNL(record: CCNLRecord): CCNL {
 
 const allCCNL: CCNL[] = ccnlCatalog.map(normalizeCCNL)
 
-// Indici veloci
 const ccnlBySlug = new Map(allCCNL.map((c) => [c.slug, c]))
 const ccnlById = new Map(allCCNL.map((c) => [c.id, c]))
 
@@ -203,12 +222,11 @@ export function getAccordiByccnlId(ccnlId: string): AccordoRecord[] {
 }
 
 // ---------------------------------------------------------------------------
-// API — Guide editoriali (5 pagine)
+// API — Guide editoriali (18 pagine)
 // ---------------------------------------------------------------------------
 
 const GUIDE_SLUGS = Object.keys(guidesMap)
 
-// Mappa codice CNEL → slug guida (costruita dinamicamente dai JSON)
 const guideByCodiceCnel = new Map<string, string>()
 for (const [slug, guide] of Object.entries(guidesMap)) {
   if (guide.info.codice_cnel) {
@@ -224,34 +242,8 @@ export function getAllGuideSlugs(): string[] {
   return GUIDE_SLUGS
 }
 
-/** Dato un codice CNEL (es. "H02X"), restituisce lo slug della guida se esiste */
 export function getGuideSlugByCodiceCnel(codiceCnel: string): string | undefined {
   return guideByCodiceCnel.get(codiceCnel)
-}
-
-// ---------------------------------------------------------------------------
-// API — Tabelle retributive strutturate
-// ---------------------------------------------------------------------------
-
-const tabelleRetributiveMap: Record<string, TabellaRetributiva> = {
-  metalmeccanici: tabellaMetalmeccanici as TabellaRetributiva,
-}
-
-export function getTabellaRetributivaByGuideSlug(
-  slug: string,
-): TabellaRetributiva | undefined {
-  return tabelleRetributiveMap[slug]
-}
-
-export function hasTabellaRetributivaStrutturata(slug: string): boolean {
-  return slug in tabelleRetributiveMap
-}
-
-/** Guide con contenuto sulle tabelle retributive (testo narrativo e/o tabella strutturata) */
-export function getGuidesWithTabelle(): CCNLGuideContent[] {
-  return Object.values(guidesMap)
-    .filter((guide) => (guide.tabelle ?? '').trim().length > 0)
-    .sort((a, b) => a.info.titolo.localeCompare(b.info.titolo, 'it'))
 }
 
 // ---------------------------------------------------------------------------

@@ -6,7 +6,7 @@ import type { CCNLGuideContent } from '@/types/ccnl'
 
 interface GuideTocProps {
   guide: CCNLGuideContent
-  currentSection?: 'contenuto' | 'livelli' | 'tabelle' | 'preavviso'
+  currentSection?: 'contenuto' | 'livelli' | 'tabelle' | 'preavviso' | 'parametri'
 }
 
 export function GuideToc({ guide, currentSection = 'contenuto' }: GuideTocProps) {
@@ -17,27 +17,37 @@ export function GuideToc({ guide, currentSection = 'contenuto' }: GuideTocProps)
       label: guide.title,
       icon: FileText,
     },
-    {
-      key: 'livelli' as const,
-      href: `/${guide.slug}/livelli`,
-      label: guide.livelli_title || 'Livelli e mansioni',
-      icon: Layers,
-    },
-    {
-      key: 'tabelle' as const,
-      href: `/${guide.slug}/tabelle-retributive`,
-      label: guide.tabelle_title || 'Tabelle retributive',
-      icon: Table2,
-    },
-    ...(guide.preavviso
-      ? [
-          {
-            key: 'preavviso' as const,
-            href: `/${guide.slug}/preavviso`,
-            label: 'Preavviso',
-            icon: Clock,
-          },
-        ]
+    ...(guide.livelli_html
+      ? [{
+          key: 'livelli' as const,
+          href: `/${guide.slug}/livelli`,
+          label: guide.livelli_title || 'Livelli e mansioni',
+          icon: Layers,
+        }]
+      : []),
+    ...(guide.tabelle_html
+      ? [{
+          key: 'tabelle' as const,
+          href: `/${guide.slug}/tabelle-retributive`,
+          label: guide.tabelle_title || 'Tabelle retributive',
+          icon: Table2,
+        }]
+      : []),
+    ...(guide.preavviso_html
+      ? [{
+          key: 'preavviso' as const,
+          href: `/${guide.slug}/preavviso`,
+          label: 'Preavviso',
+          icon: Clock,
+        }]
+      : []),
+    ...(guide.parametri_html
+      ? [{
+          key: 'parametri' as const,
+          href: `/${guide.slug}/parametri`,
+          label: 'Parametri',
+          icon: Layers,
+        }]
       : []),
   ]
 

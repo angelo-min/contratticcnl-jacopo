@@ -7,20 +7,19 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Card, CardContent } from '@/components/ui/card'
 import { GuideInfoCard } from '@/components/guide/guide-info-card'
 import { GuideToc } from '@/components/guide/guide-toc'
+import { RichContent } from '@/components/guide/rich-content'
 import type { CCNLGuideContent } from '@/types/ccnl'
 
 interface GuideSubpageProps {
   guide: CCNLGuideContent
   title: string
-  content: string
-  currentSection: 'livelli' | 'tabelle' | 'preavviso'
-  beforeContent?: React.ReactNode
+  contentHtml: string
+  currentSection: 'livelli' | 'tabelle' | 'preavviso' | 'parametri'
 }
 
-export function GuideSubpage({ guide, title, content, currentSection, beforeContent }: GuideSubpageProps) {
+export function GuideSubpage({ guide, title, contentHtml, currentSection }: GuideSubpageProps) {
   return (
     <>
       {/* Header */}
@@ -59,15 +58,10 @@ export function GuideSubpage({ guide, title, content, currentSection, beforeCont
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Main content */}
-          <div className="min-w-0 flex-1 space-y-6">
-            {beforeContent}
-            <Card>
-              <CardContent className="prose prose-sm max-w-none p-6 text-muted-foreground sm:p-8">
-                <div className="whitespace-pre-line leading-relaxed">
-                  {content}
-                </div>
-              </CardContent>
-            </Card>
+          <div className="min-w-0 flex-1">
+            <div className="mx-auto max-w-3xl px-2 py-4">
+              <RichContent html={contentHtml} />
+            </div>
           </div>
 
           {/* Sidebar */}

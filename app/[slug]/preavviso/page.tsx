@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const guide = getCCNLGuide(slug)
 
-  if (!guide || !guide.preavviso) {
+  if (!guide || !guide.preavviso_html) {
     return { title: 'Pagina non trovata | ContrattiCCNL.it' }
   }
 
@@ -29,7 +29,7 @@ export default async function PreavvisoPage({ params }: Props) {
   const { slug } = await params
   const guide = getCCNLGuide(slug)
 
-  if (!guide || !guide.preavviso) {
+  if (!guide || !guide.preavviso_html) {
     notFound()
   }
 
@@ -40,7 +40,7 @@ export default async function PreavvisoPage({ params }: Props) {
         <GuideSubpage
           guide={guide}
           title="Preavviso"
-          content={guide.preavviso}
+          contentHtml={guide.preavviso_html}
           currentSection="preavviso"
         />
       </main>

@@ -2,8 +2,7 @@ import { notFound } from 'next/navigation'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { GuideSubpage } from '@/components/guide/guide-subpage'
-import { TabellaRetributivaView } from '@/components/tabelle/tabella-retributiva'
-import { getCCNLGuide, getTabellaRetributivaByGuideSlug } from '@/data/db'
+import { getCCNLGuide } from '@/data/db'
 import type { Metadata } from 'next'
 
 export const revalidate = 86400
@@ -32,11 +31,9 @@ export default async function TabelleRetributivePage({ params }: Props) {
   const { slug } = await params
   const guide = getCCNLGuide(slug)
 
-  if (!guide || !guide.tabelle) {
+  if (!guide || !guide.tabelle_html) {
     notFound()
   }
-
-  const tabella = getTabellaRetributivaByGuideSlug(slug)
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -45,9 +42,8 @@ export default async function TabelleRetributivePage({ params }: Props) {
         <GuideSubpage
           guide={guide}
           title={guide.tabelle_title || 'Tabelle retributive'}
-          content={guide.tabelle}
+          contentHtml={guide.tabelle_html}
           currentSection="tabelle"
-          beforeContent={tabella ? <TabellaRetributivaView tabella={tabella} /> : undefined}
         />
       </main>
       <Footer />

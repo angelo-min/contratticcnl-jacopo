@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     })
-    if (guide.livelli) {
+    if (guide.livelli_html) {
       guidePages.push({
         url: `${BASE_URL}/${slug}/livelli`,
         lastModified: now,
@@ -45,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
       })
     }
-    if (guide.tabelle) {
+    if (guide.tabelle_html) {
       guidePages.push({
         url: `${BASE_URL}/${slug}/tabelle-retributive`,
         lastModified: now,
@@ -53,9 +53,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
       })
     }
-    if (guide.preavviso) {
+    if (guide.preavviso_html) {
       guidePages.push({
         url: `${BASE_URL}/${slug}/preavviso`,
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      })
+    }
+    if (guide.parametri_html) {
+      guidePages.push({
+        url: `${BASE_URL}/${slug}/parametri`,
         lastModified: now,
         changeFrequency: 'monthly',
         priority: 0.7,
