@@ -75,7 +75,6 @@ export interface CCNLGuideContent {
   seo_title: string
   seo_description: string
   info: CCNLGuideInfo
-  // HTML fields (from XML extraction — canonical)
   content_html: string
   livelli_html: string | null
   livelli_title: string | null
@@ -83,11 +82,6 @@ export interface CCNLGuideContent {
   tabelle_title: string | null
   preavviso_html: string | null
   parametri_html: string | null
-  // Legacy text-only fields — kept for backward compat, removed in Phase 3
-  content: string
-  livelli: string
-  tabelle: string
-  preavviso?: string
 }
 
 export interface Macrosettore {

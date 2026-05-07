@@ -293,7 +293,14 @@ def download_images(all_html):
             continue
         os.makedirs(os.path.dirname(local), exist_ok=True)
         try:
-            resp = requests.get(url, timeout=15)
+            resp = requests.get(
+                url,
+                timeout=15,
+                headers={
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Referer': 'https://www.contratticcnl.it/',
+                },
+            )
             if resp.status_code == 200:
                 with open(local, 'wb') as f:
                     f.write(resp.content)
@@ -401,16 +408,12 @@ def main():
         existing_info = existing_guides.get(guide_slug, {}).get('info')
         info = build_info(guide_slug, catalog, existing_info)
 
-        # Preserve old text-only fields for backward compatibility (removed in Phase 3)
-        old = existing_guides.get(guide_slug, {})
-
         guide_data: dict = {
             'slug': guide_slug,
             'title': page_title,
             'seo_title': seo_title,
             'seo_description': seo_desc,
             'info': info,
-            # New HTML fields
             'content_html': content_html,
             'livelli_html': livelli_html,
             'livelli_title': livelli_title,
@@ -418,11 +421,6 @@ def main():
             'tabelle_title': tabelle_title,
             'preavviso_html': preavviso_html,
             'parametri_html': parametri_html,
-            # Old text fields — kept for now, removed after Phase 3
-            'content': old.get('content', ''),
-            'livelli': old.get('livelli', ''),
-            'tabelle': old.get('tabelle', ''),
-            'preavviso': old.get('preavviso', None),
         }
 
         out_path = os.path.join(GUIDE_DIR, f'{guide_slug}.json')
