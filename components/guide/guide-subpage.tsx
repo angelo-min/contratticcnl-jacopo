@@ -17,9 +17,10 @@ interface GuideSubpageProps {
   title: string
   content: string
   currentSection: 'livelli' | 'tabelle' | 'preavviso'
+  beforeContent?: React.ReactNode
 }
 
-export function GuideSubpage({ guide, title, content, currentSection }: GuideSubpageProps) {
+export function GuideSubpage({ guide, title, content, currentSection, beforeContent }: GuideSubpageProps) {
   return (
     <>
       {/* Header */}
@@ -58,7 +59,8 @@ export function GuideSubpage({ guide, title, content, currentSection }: GuideSub
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Main content */}
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 space-y-6">
+            {beforeContent}
             <Card>
               <CardContent className="prose prose-sm max-w-none p-6 text-muted-foreground sm:p-8">
                 <div className="whitespace-pre-line leading-relaxed">

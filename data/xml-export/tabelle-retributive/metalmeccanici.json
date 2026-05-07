@@ -1,0 +1,62 @@
+{
+  "codiceCnel": "C011",
+  "guidaSlug": "metalmeccanici",
+  "decorrenza": "2025-06-01",
+  "nota": "Minimo conglobato (contingenza + EDR inclusi).",
+  "righe": [
+    {
+      "livello": "A1",
+      "minimoTabellare": 2837.12,
+      "scatti": 40.96,
+      "totale": 2837.12
+    },
+    {
+      "livello": "B3",
+      "minimoTabellare": 2770.74,
+      "scatti": 40.96,
+      "totale": 2770.74
+    },
+    {
+      "livello": "B2",
+      "minimoTabellare": 2481.84,
+      "scatti": 36.41,
+      "totale": 2481.84
+    },
+    {
+      "livello": "B1",
+      "minimoTabellare": 2313.34,
+      "scatti": 32.43,
+      "totale": 2313.34
+    },
+    {
+      "livello": "C3",
+      "minimoTabellare": 2158.26,
+      "scatti": 29.64,
+      "totale": 2158.26
+    },
+    {
+      "livello": "C2",
+      "minimoTabellare": 2015.24,
+      "scatti": 26.75,
+      "totale": 2015.24
+    },
+    {
+      "livello": "C1",
+      "minimoTabellare": 1973.51,
+      "scatti": 25.05,
+      "totale": 1973.51
+    },
+    {
+      "livello": "D2",
+      "minimoTabellare": 1931.78,
+      "scatti": 25.05,
+      "totale": 1931.78
+    },
+    {
+      "livello": "D1",
+      "minimoTabellare": 1742.03,
+      "scatti": 21.59,
+      "totale": 1742.03
+    }
+  ]
+}

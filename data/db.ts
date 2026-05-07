@@ -6,6 +6,7 @@ import type {
   PostRecord,
   CCNLGuideContent,
   Macrosettore,
+  TabellaRetributiva,
 } from '@/types/ccnl'
 
 import ccnlCatalogRaw from './xml-export/ccnl-catalog.json'
@@ -18,6 +19,9 @@ import guideVigilanza from './xml-export/ccnl-guide/vigilanza-privata.json'
 import guideMetalmeccanici from './xml-export/ccnl-guide/metalmeccanici.json'
 import guideEnergia from './xml-export/ccnl-guide/energia-petrolio.json'
 import guideLavoroDomestico from './xml-export/ccnl-guide/lavoro-domestico.json'
+
+// Tabelle retributive strutturate (per ora solo Metalmeccanici)
+import tabellaMetalmeccanici from './xml-export/tabelle-retributive/metalmeccanici.json'
 
 // ---------------------------------------------------------------------------
 // Raw data
@@ -223,6 +227,31 @@ export function getAllGuideSlugs(): string[] {
 /** Dato un codice CNEL (es. "H02X"), restituisce lo slug della guida se esiste */
 export function getGuideSlugByCodiceCnel(codiceCnel: string): string | undefined {
   return guideByCodiceCnel.get(codiceCnel)
+}
+
+// ---------------------------------------------------------------------------
+// API — Tabelle retributive strutturate
+// ---------------------------------------------------------------------------
+
+const tabelleRetributiveMap: Record<string, TabellaRetributiva> = {
+  metalmeccanici: tabellaMetalmeccanici as TabellaRetributiva,
+}
+
+export function getTabellaRetributivaByGuideSlug(
+  slug: string,
+): TabellaRetributiva | undefined {
+  return tabelleRetributiveMap[slug]
+}
+
+export function hasTabellaRetributivaStrutturata(slug: string): boolean {
+  return slug in tabelleRetributiveMap
+}
+
+/** Guide con contenuto sulle tabelle retributive (testo narrativo e/o tabella strutturata) */
+export function getGuidesWithTabelle(): CCNLGuideContent[] {
+  return Object.values(guidesMap)
+    .filter((guide) => (guide.tabelle ?? '').trim().length > 0)
+    .sort((a, b) => a.info.titolo.localeCompare(b.info.titolo, 'it'))
 }
 
 // ---------------------------------------------------------------------------

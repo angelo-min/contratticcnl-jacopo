@@ -91,3 +91,18 @@ export interface Macrosettore {
   descrizione: string
   numeroContratti: number
 }
+
+export interface TabellaRetributivaRow {
+  livello: string
+  minimoTabellare: number
+  scatti: number | null
+  totale: number
+}
+
+export interface TabellaRetributiva {
+  codiceCnel: string
+  guidaSlug: string
+  decorrenza: string    // ISO "YYYY-MM-DD"
+  nota?: string
+  righe: TabellaRetributivaRow[]
+}
