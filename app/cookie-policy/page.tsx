@@ -1,6 +1,6 @@
 import { StaticPage } from '@/components/static-page'
 import type { Metadata } from 'next'
-import data from '@/data/xml-export/cookie-policy.json'
+import staticPages from '@/data/xml-export/static-pages.json'
 
 export const metadata: Metadata = {
   title: 'Cookie Policy | ContrattiCCNL.it',
@@ -8,9 +8,6 @@ export const metadata: Metadata = {
 }
 
 export default function CookiePolicyPage() {
-  return (
-    <StaticPage title={data.title}>
-      {data.content}
-    </StaticPage>
-  )
+  const data = staticPages['cookie-policy']
+  return <StaticPage title={data.title} html={data.content_html} />
 }

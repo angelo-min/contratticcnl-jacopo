@@ -1,6 +1,6 @@
 import { StaticPage } from '@/components/static-page'
 import type { Metadata } from 'next'
-import data from '@/data/xml-export/disclaimer.json'
+import staticPages from '@/data/xml-export/static-pages.json'
 
 export const metadata: Metadata = {
   title: 'Disclaimer | ContrattiCCNL.it',
@@ -8,9 +8,6 @@ export const metadata: Metadata = {
 }
 
 export default function DisclaimerPage() {
-  return (
-    <StaticPage title={data.title}>
-      {data.content}
-    </StaticPage>
-  )
+  const data = staticPages['disclaimer']
+  return <StaticPage title={data.title} html={data.content_html} />
 }

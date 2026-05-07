@@ -1,12 +1,13 @@
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { RichContent } from '@/components/guide/rich-content'
 
 interface StaticPageProps {
   title: string
-  children: React.ReactNode
+  html: string
 }
 
-export function StaticPage({ title, children }: StaticPageProps) {
+export function StaticPage({ title, html }: StaticPageProps) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
@@ -19,9 +20,7 @@ export function StaticPage({ title, children }: StaticPageProps) {
           </div>
         </div>
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="text-[1.0625rem] leading-[1.8] text-foreground/85 whitespace-pre-line">
-            {children}
-          </div>
+          <RichContent html={html} />
         </div>
       </main>
       <Footer />

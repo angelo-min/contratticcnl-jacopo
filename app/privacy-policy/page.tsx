@@ -1,6 +1,6 @@
 import { StaticPage } from '@/components/static-page'
 import type { Metadata } from 'next'
-import data from '@/data/xml-export/privacy-policy.json'
+import staticPages from '@/data/xml-export/static-pages.json'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | ContrattiCCNL.it',
@@ -8,9 +8,6 @@ export const metadata: Metadata = {
 }
 
 export default function PrivacyPolicyPage() {
-  return (
-    <StaticPage title={data.title}>
-      {data.content}
-    </StaticPage>
-  )
+  const data = staticPages['privacy-policy']
+  return <StaticPage title={data.title} html={data.content_html} />
 }
