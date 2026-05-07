@@ -41,6 +41,14 @@ export function InPageToc({ headings }: InPageTocProps) {
           <li key={id}>
             <a
               href={`#${id}`}
+              onClick={(e) => {
+                e.preventDefault()
+                const el = document.getElementById(id)
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  history.replaceState(null, '', `#${id}`)
+                }
+              }}
               className={cn(
                 'block rounded px-2 py-1.5 text-sm leading-tight transition-colors',
                 activeId === id

@@ -65,7 +65,7 @@ export function GuideSubpage({ guide, title, contentHtml, currentSection }: Guid
           </div>
 
           {/* Sidebar */}
-          <aside className="w-full shrink-0 space-y-6 lg:w-80">
+          <aside className="w-full shrink-0 space-y-6 lg:sticky lg:top-24 lg:w-80 lg:self-start">
             <GuideToc guide={guide} currentSection={currentSection} />
             <GuideInfoCard info={guide.info} />
           </aside>

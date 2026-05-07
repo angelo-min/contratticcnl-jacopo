@@ -114,7 +114,7 @@ export function GuidePage({ guide }: GuidePageProps) {
           </div>
 
           {/* Sidebar */}
-          <aside className="w-full shrink-0 space-y-6 lg:w-72">
+          <aside className="w-full shrink-0 space-y-6 lg:sticky lg:top-24 lg:w-72 lg:self-start">
             <GuideToc guide={guide} currentSection="contenuto" />
             {headings.length > 2 && <InPageToc headings={headings} />}
             <GuideInfoCard info={guide.info} />
