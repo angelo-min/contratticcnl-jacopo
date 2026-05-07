@@ -43,36 +43,42 @@ export function GuidePage({ guide }: GuidePageProps) {
         ]}
       />
       {/* Header */}
-      <div className="border-b border-border bg-card py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/contratti-ccnl">CCNL</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{guide.info.titolo}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+      <div className="relative border-b border-border/50 bg-background pb-16 pt-32 overflow-hidden">
+        {/* Subtle accent blur */}
+        <div className="absolute left-10 top-0 -z-10 h-[300px] w-[300px] rounded-full bg-primary/5 blur-[100px]" />
 
-          <h1 className="mt-6 font-heading text-3xl font-bold text-foreground sm:text-4xl">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="mb-8">
+            <Breadcrumb>
+              <BreadcrumbList className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/contratti-ccnl" className="hover:text-primary transition-colors">CCNL</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-foreground">{guide.info.titolo}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+
+          <h1 className="max-w-4xl font-heading text-4xl font-normal leading-tight tracking-[-0.02em] text-foreground sm:text-6xl lg:text-7xl">
             {guide.title}
           </h1>
 
           {/* Key-facts row */}
-          <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+          <div className="mt-10 flex flex-wrap items-center gap-4 text-sm font-medium">
             <Badge
               variant="outline"
+              className="text-xs uppercase tracking-widest px-3 py-1.5 font-bold"
               style={{
                 color: `var(${cssVar})`,
                 borderColor: `color-mix(in srgb, var(${cssVar}) 40%, transparent)`,
@@ -83,22 +89,25 @@ export function GuidePage({ guide }: GuidePageProps) {
             </Badge>
 
             {guide.info.scadenza && (
-              <span className="text-muted-foreground">
-                Scad.{' '}
-                <span className="font-medium text-foreground">{guide.info.scadenza}</span>
+              <span className="text-muted-foreground uppercase tracking-widest text-xs font-bold">
+                Scadenza{' '}
+                <span className="text-foreground ml-1">{guide.info.scadenza}</span>
               </span>
             )}
 
             {guide.info.codice_cnel && (
-              <span className="text-muted-foreground">
+              <span className="text-muted-foreground uppercase tracking-widest text-xs font-bold flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-border/80"></span>
                 CNEL{' '}
-                <span className="font-mono font-medium text-foreground">
+                <span className="text-foreground ml-1">
                   {guide.info.codice_cnel}
                 </span>
               </span>
             )}
 
-            <Badge variant="secondary">{guide.info.settore}</Badge>
+            <Badge variant="secondary" className="text-xs font-bold uppercase tracking-widest ml-auto lg:ml-0 bg-secondary/50">
+              {guide.info.settore}
+            </Badge>
           </div>
         </div>
       </div>

@@ -1,7 +1,5 @@
 import Link from 'next/link'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/status-badge'
 import { ArrowRight, FileText } from 'lucide-react'
 import type { CCNL } from '@/types/ccnl'
@@ -14,65 +12,60 @@ interface CCNLCardProps {
 export function CCNLCard({ ccnl, variant = 'default' }: CCNLCardProps) {
   if (variant === 'compact') {
     return (
-      <Card className="group transition-all hover:border-primary/30 hover:shadow-md">
-        <CardContent className="flex items-center justify-between p-4">
+      <Link href={`/ccnl/${ccnl.slug}`} className="group block h-full">
+        <div className="flex h-full items-center justify-between rounded-[2rem] bg-card p-5 border border-border/40 transition-all duration-300 hover:bg-card/60 hover:shadow-xl hover:-translate-y-1">
           <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="secondary" className="text-xs">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <Badge variant="secondary" className="text-[10px] font-bold uppercase tracking-widest bg-secondary/50">
                 {ccnl.settore}
               </Badge>
-              <StatusBadge status={ccnl.stato} className="text-xs" />
+              <StatusBadge status={ccnl.stato} className="text-[10px] font-bold uppercase tracking-widest" />
             </div>
-            <Link href={`/ccnl/${ccnl.slug}`}>
-              <h3 className="mt-2 truncate font-heading text-base font-bold text-foreground transition-colors group-hover:text-primary">
-                {ccnl.nome}
-              </h3>
-            </Link>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <h3 className="truncate font-heading text-xl font-medium text-foreground transition-colors group-hover:text-primary">
+              {ccnl.nome}
+            </h3>
+            <p className="mt-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">
               Scadenza: {ccnl.scadenza}
             </p>
           </div>
-          <Link
-            href={`/ccnl/${ccnl.slug}`}
-            className="ml-4 flex items-center text-sm font-medium text-primary transition-colors hover:text-primary/80"
-          >
-            Consulta
-            <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </CardContent>
-      </Card>
+          <div className="ml-4 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
+            <ArrowRight className="h-5 w-5" />
+          </div>
+        </div>
+      </Link>
     )
   }
 
   return (
-    <Card className="group flex h-full flex-col transition-all hover:border-primary/30 hover:shadow-md">
-      <CardHeader className="pb-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="secondary">{ccnl.settore}</Badge>
-          <StatusBadge status={ccnl.stato} />
+    <Link href={`/ccnl/${ccnl.slug}`} className="group block h-full">
+      <div className="flex h-full flex-col overflow-hidden rounded-[2rem] bg-card p-6 border border-border/40 transition-all duration-500 hover:bg-card/60 hover:shadow-xl hover:-translate-y-2">
+        <div className="flex flex-wrap items-center gap-2 mb-6">
+          <Badge variant="secondary" className="text-[10px] font-bold uppercase tracking-widest bg-secondary/50">
+            {ccnl.settore}
+          </Badge>
+          <StatusBadge status={ccnl.stato} className="text-[10px] font-bold uppercase tracking-widest" />
         </div>
-        <Link href={`/ccnl/${ccnl.slug}`}>
-          <h3 className="mt-2 line-clamp-2 font-heading text-lg font-bold text-foreground transition-colors group-hover:text-primary">
+        
+        <div className="flex-1">
+          <h3 className="mb-4 line-clamp-3 font-heading text-2xl leading-tight font-medium text-foreground transition-colors group-hover:text-primary">
             {ccnl.nome}
           </h3>
-        </Link>
-      </CardHeader>
-      <CardContent className="flex flex-1 flex-col">
-        <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-          {ccnl.sottosettore}
-        </p>
-        <div className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">
-          Scadenza: {ccnl.scadenza}
+          <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            {ccnl.sottosettore}
+          </p>
         </div>
-        <div className="mt-4">
-          <Button asChild variant="default" size="sm" className="w-full">
-            <Link href={`/ccnl/${ccnl.slug}`}>
-              <FileText className="mr-2 h-4 w-4" />
-              Consulta
-            </Link>
-          </Button>
+        
+        <div className="mt-8 flex items-end justify-between border-t border-border/40 pt-6">
+          <div className="flex flex-col">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Scadenza</span>
+            <span className="text-sm font-medium text-foreground">{ccnl.scadenza}</span>
+          </div>
+          
+          <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary transition-transform group-hover:translate-x-1">
+            Consulta <ArrowRight className="h-4 w-4" />
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </Link>
   )
 }

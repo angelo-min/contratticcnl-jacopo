@@ -61,18 +61,25 @@ function CatalogContent({ searchParams }: { searchParams: Awaited<PageProps['sea
   return (
     <>
       {/* Search header */}
-      <div className="border-b border-border bg-card py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
-            {query ? `Risultati per: ${query}` : 'Catalogo CCNL'}
+      <div className="relative border-b border-border/50 bg-background pb-12 pt-32 overflow-hidden">
+        {/* Texture overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--color-primary)_0%,transparent_20%)] opacity-[0.03]"></div>
+        
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
+          <h1 className="font-heading text-5xl font-normal tracking-[-0.02em] text-foreground sm:text-7xl lg:text-8xl">
+            {query ? (
+              <>Risultati per <br/><span className="italic text-primary">'{query}'</span></>
+            ) : (
+              <>Catalogo <span className="italic text-primary">Archivio</span></>
+            )}
           </h1>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-6 max-w-2xl text-lg font-medium text-muted-foreground">
             {query
               ? `${filteredResults.length} contratti trovati`
-              : 'Tutti i contratti collettivi nazionali dal database CNEL'}
+              : 'Esplora e ricerca tra tutti i contratti collettivi nazionali sincronizzati dal database CNEL.'}
           </p>
-          <div className="mt-6 max-w-2xl">
-            <SearchBar defaultValue={query} />
+          <div className="mt-10 w-full max-w-3xl">
+            <SearchBar defaultValue={query} large />
           </div>
         </div>
       </div>
