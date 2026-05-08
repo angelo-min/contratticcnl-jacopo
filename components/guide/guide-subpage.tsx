@@ -10,6 +10,7 @@ import {
 import { GuideInfoCard } from '@/components/guide/guide-info-card'
 import { GuideToc } from '@/components/guide/guide-toc'
 import { RichContent } from '@/components/guide/rich-content'
+import { ShareButtons } from '@/components/share-buttons'
 import type { CCNLGuideContent } from '@/types/ccnl'
 
 interface GuideSubpageProps {
@@ -56,6 +57,10 @@ export function GuideSubpage({ guide, title, contentHtml, currentSection }: Guid
           <p className="mt-6 max-w-2xl text-base font-medium text-muted-foreground">
             {guide.info.titolo}
           </p>
+
+          <div className="mt-8 flex justify-end">
+            <ShareButtons title={`${title} — ${guide.info.titolo}`} />
+          </div>
         </div>
       </div>
 

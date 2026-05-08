@@ -19,7 +19,7 @@ export function SearchBar({ large = false, defaultValue = '', className = '' }: 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (query.trim()) {
-      router.push(`/contratti-ccnl?q=${encodeURIComponent(query.trim())}`)
+      router.push(`/ccnl?q=${encodeURIComponent(query.trim())}`)
     }
   }
 

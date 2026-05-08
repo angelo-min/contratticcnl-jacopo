@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { StatusBadge } from '@/components/status-badge'
 import { BreadcrumbJsonLd } from '@/components/breadcrumb-jsonld'
 import { Button } from '@/components/ui/button'
+import { ShareButtons } from '@/components/share-buttons'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,9 +11,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { ExternalLink, Calendar, Users, BookOpen } from 'lucide-react'
+import { Archive, Calendar, Users, BookOpen, Download } from 'lucide-react'
 import type { CCNL } from '@/types/ccnl'
-import { getMacrosettoreByCod, getGuideSlugByCodiceCnel } from '@/data/db'
+import { getMacrosettoreByCod, getGuideSlugByCodiceCnel, getMainPdfUrlForCCNL } from '@/data/db'
 
 interface CCNLHeaderProps {
   ccnl: CCNL
@@ -21,13 +22,14 @@ interface CCNLHeaderProps {
 export function CCNLHeader({ ccnl }: CCNLHeaderProps) {
   const macrosettore = getMacrosettoreByCod(ccnl.macrosettore)
   const guideSlug = getGuideSlugByCodiceCnel(ccnl.id)
+  const pdfUrl = getMainPdfUrlForCCNL(ccnl.id)
 
   return (
     <div className="border-b border-border bg-card">
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', href: '/' },
-          { name: 'CCNL', href: '/contratti-ccnl' },
+          { name: 'CCNL', href: '/ccnl' },
           ...(macrosettore ? [{ name: macrosettore.nome, href: `/settore/${macrosettore.slug}` }] : []),
           { name: ccnl.nome, href: `/ccnl/${ccnl.slug}` },
         ]}
@@ -44,7 +46,7 @@ export function CCNLHeader({ ccnl }: CCNLHeaderProps) {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/contratti-ccnl">CCNL</Link>
+                <Link href="/ccnl">CCNL</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             {macrosettore && (
@@ -114,8 +116,16 @@ export function CCNLHeader({ ccnl }: CCNLHeaderProps) {
 
           {/* Action buttons */}
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
-            {guideSlug && (
+            {pdfUrl && (
               <Button size="lg" asChild>
+                <a href={pdfUrl} target="_blank" rel="nofollow noopener">
+                  <Download className="mr-2 h-5 w-5" />
+                  Scarica PDF
+                </a>
+              </Button>
+            )}
+            {guideSlug && (
+              <Button variant={pdfUrl ? 'outline' : 'default'} size="lg" asChild>
                 <Link href={`/${guideSlug}`}>
                   <BookOpen className="mr-2 h-5 w-5" />
                   Leggi la guida
@@ -123,11 +133,12 @@ export function CCNLHeader({ ccnl }: CCNLHeaderProps) {
               </Button>
             )}
             <Button variant="outline" size="lg" asChild>
-              <a href="https://www.cnel.it/Archivio-Contratti" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-5 w-5" />
-                Archivio CNEL
-              </a>
+              <Link href="/ccnl">
+                <Archive className="mr-2 h-5 w-5" />
+                Archivio CCNL
+              </Link>
             </Button>
+            <ShareButtons title={ccnl.nome} className="mt-1 justify-start lg:justify-start" />
           </div>
         </div>
       </div>

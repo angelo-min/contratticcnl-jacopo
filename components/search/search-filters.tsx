@@ -36,14 +36,14 @@ export function SearchFilters({ selectedSectors, selectedStatuses }: SearchFilte
         .forEach((v) => params.append(type === 'sector' ? 'settore' : 'stato', v))
     }
 
-    router.push(`/contratti-ccnl?${params.toString()}`)
+    router.push(`/ccnl?${params.toString()}`)
   }
 
   const clearFilters = () => {
     const params = new URLSearchParams()
     const query = searchParams.get('q')
     if (query) params.set('q', query)
-    router.push(`/contratti-ccnl?${params.toString()}`)
+    router.push(`/ccnl?${params.toString()}`)
   }
 
   const hasFilters = selectedSectors.length > 0 || selectedStatuses.length > 0

@@ -1,0 +1,26 @@
+{
+  "title": "I contratti CCNL più importanti, a tua disposizione.",
+  "intro": "Comprendere doveri e diritti non è mai stato così facile. Cerca fra oltre 1.000 contratti nazionali collettivi, 2.000 accordi di rinnovo e aggiornamenti economici. Consulta i PDF o scarica gratis i documenti che ti servono.",
+  "faqs": [
+    {
+      "question": "Cos'è il CCNL?",
+      "answer": "<p>Il CCNL, abbreviazione di <strong>Contratto Collettivo Nazionale del Lavoro</strong>, è la fonte del diritto del lavoro. Il suo ruolo è quello di consentire alle imprese e alle organizzazioni che rappresentano i lavoratori di accordarsi sulle <strong>regole che disciplinano il rapporto di lavoro</strong>. I CCNL sono molto importanti perché contengono delle informazioni fondamentali per il lavoratore. </p>"
+    },
+    {
+      "question": "Il CCNL è il contratto di lavoro?",
+      "answer": "<p>Il CCNL si posiziona <strong>a metà tra la legge e il contratto</strong> che il lavoratore stipula con l’azienda. Ciò ha diverse conseguenze. In primis, i CCNL possono derogare alla legge solo in senso migliorativo. Ci sono delle deroghe a questo principio come nel caso di superamento del divieto di demansionamento in seguito di gravi crisi aziendali. Inoltre, i contratti individuali possono derogare il CCNL ma solo nei limiti disposti dall’articolo 2077 del Codice Civile.</p>"
+    },
+    {
+      "question": "Quanti CCNL ci sono?",
+      "answer": "<p>I contratti collettivi nazionali del lavoro correnti presenti nel database del CNEL sono 1.017 suddivisi in 14 macrosettori:</p>"
+    },
+    {
+      "question": "Chi decide i CCNL?",
+      "answer": "<p>In Italia il CCNL è viene stipulato tra le organizzazioni dei datori di lavoro, come Confindustria o Confcommercio, e le organizzazioni / sigle sindacali dei lavoratori, come CGIL, CISL e UIL.</p>"
+    },
+    {
+      "question": "Quando non si applica il CCNL?",
+      "answer": "<p><strong>Quando il datore di lavoro non è iscritto ad alcun tipo di associazione</strong> può scegliere o meno di applicare un CCNL. Tuttavia è sempre tenuto ad applicare le norme del diritto del lavoro e garantire i minimi retributivi sanciti dal CCNL di quel settore, come stabilito dall’articolo 36 della Costituzione secondo cui “il lavoratore ha il diritto di ricevere una retribuzione sufficiente e proporzionata alla quantità e qualità del suo lavoro”.</p>"
+    }
+  ]
+}

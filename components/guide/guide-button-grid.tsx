@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FileText, Layers, Table2, Clock, HelpCircle, Download } from 'lucide-react'
+import { FileText, Layers, Table2, Clock, HelpCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { CCNLGuideContent } from '@/types/ccnl'
 
@@ -40,16 +40,10 @@ export function GuideButtonGrid({ guide, hasFaq = false }: GuideButtonGridProps)
       icon: HelpCircle,
       enabled: hasFaq,
     },
-    {
-      label: 'PDF',
-      href: '/pdf/',
-      icon: Download,
-      enabled: true,
-    },
   ]
 
   return (
-    <nav aria-label="Sezioni del CCNL" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    <nav aria-label="Sezioni del CCNL" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       {items.map((item) => {
         const Icon = item.icon
         const baseClass = cn(

@@ -31,11 +31,11 @@ export function Footer() {
           <div className="lg:col-span-5 flex flex-col items-start pr-8">
             <Link href="/" className="flex items-center gap-3 group">
               <img
-                src="/icon-dark-32x32.png"
+                src="/ccnl.png"
                 alt=""
                 width={48}
                 height={48}
-                className="h-12 w-12 transition-transform group-hover:scale-105"
+                className="h-12 w-12 object-contain invert transition-transform group-hover:scale-105"
               />
               <span className="font-heading text-3xl font-normal text-background">ContrattiCCNL</span>
             </Link>

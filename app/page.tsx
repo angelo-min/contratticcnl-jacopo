@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/home/hero-section'
 import { StatsSection } from '@/components/home/stats-section'
 import { GuidesSection } from '@/components/home/guides-section'
 import { SectorsSection } from '@/components/home/sectors-section'
+import { HomeFaqSection } from '@/components/home/home-faq-section'
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
         <StatsSection />
         <GuidesSection />
         <SectorsSection />
+        <HomeFaqSection />
       </main>
       <Footer />
     </div>

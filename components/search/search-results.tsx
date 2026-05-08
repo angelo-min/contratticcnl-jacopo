@@ -34,7 +34,7 @@ export function SearchResults({ results, query, totalResults }: SearchResultsPro
           <p className="w-full text-sm text-muted-foreground">Suggerimenti di ricerca:</p>
           {['Metalmeccanico', 'Commercio', 'Edilizia', 'Chimico'].map((suggestion) => (
             <Button key={suggestion} variant="outline" size="sm" asChild>
-              <a href={`/contratti-ccnl?q=${encodeURIComponent(suggestion)}`}>{suggestion}</a>
+              <a href={`/ccnl?q=${encodeURIComponent(suggestion)}`}>{suggestion}</a>
             </Button>
           ))}
         </div>

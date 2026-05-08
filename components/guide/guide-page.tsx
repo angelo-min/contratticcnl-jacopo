@@ -17,13 +17,14 @@ import { GuidePdfCta } from '@/components/guide/guide-pdf-cta'
 import { GuideFaq } from '@/components/guide/guide-faq'
 import { GuideRelatedPosts } from '@/components/guide/guide-related-posts'
 import { BreadcrumbJsonLd } from '@/components/breadcrumb-jsonld'
+import { ShareButtons } from '@/components/share-buttons'
 import {
   getStatoContratto,
   addHeadingIds,
   extractHeadings,
   parseGuideContent,
 } from '@/lib/guide-utils'
-import { getPostsByCategory } from '@/data/db'
+import { getPostsByCategory, getMainPdfUrlForCCNL } from '@/data/db'
 import type { CCNLGuideContent } from '@/types/ccnl'
 
 interface GuidePageProps {
@@ -44,6 +45,7 @@ export function GuidePage({ guide }: GuidePageProps) {
   const withIds = addHeadingIds(body)
   const bodyHeadings = extractHeadings(withIds)
   const hasRelatedPosts = getPostsByCategory(guide.slug).length > 0
+  const pdfUrl = guide.info.codice_cnel ? getMainPdfUrlForCCNL(guide.info.codice_cnel) : null
   const tocHeadings = [
     ...bodyHeadings,
     ...(hasRelatedPosts ? [{ id: 'articoli-correlati', text: 'Notizie e articoli correlati' }] : []),
@@ -55,7 +57,7 @@ export function GuidePage({ guide }: GuidePageProps) {
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', href: '/' },
-          { name: 'CCNL', href: '/contratti-ccnl' },
+          { name: 'CCNL', href: '/ccnl' },
           { name: guide.info.titolo, href: `/${guide.slug}` },
         ]}
       />
@@ -75,7 +77,7 @@ export function GuidePage({ guide }: GuidePageProps) {
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/contratti-ccnl" className="hover:text-primary transition-colors">CCNL</Link>
+                    <Link href="/ccnl" className="hover:text-primary transition-colors">CCNL</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
@@ -127,9 +129,15 @@ export function GuidePage({ guide }: GuidePageProps) {
           {/* Top: 6-button grid + PDF CTA */}
           <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
             <GuideButtonGrid guide={guide} hasFaq={faqItems.length > 0} />
-            <div className="lg:max-w-md">
-              <GuidePdfCta />
-            </div>
+            {pdfUrl && (
+              <div className="lg:max-w-md">
+                <GuidePdfCta pdfUrl={pdfUrl} title={guide.title} />
+              </div>
+            )}
+          </div>
+
+          <div className="mt-8 flex justify-end">
+            <ShareButtons title={guide.title} />
           </div>
         </div>
       </div>

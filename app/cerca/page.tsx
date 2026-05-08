@@ -6,6 +6,6 @@ interface SearchPageProps {
 
 export default async function CercaPage({ searchParams }: SearchPageProps) {
   const { q } = await searchParams
-  const target = q ? `/contratti-ccnl?q=${encodeURIComponent(q)}` : '/contratti-ccnl'
+  const target = q ? `/ccnl?q=${encodeURIComponent(q)}` : '/ccnl'
   redirect(target)
 }

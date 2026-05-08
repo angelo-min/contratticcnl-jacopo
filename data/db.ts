@@ -221,6 +221,40 @@ export function getAccordiByccnlId(ccnlId: string): AccordoRecord[] {
   return accordi.filter((a) => a.ccnl_id === ccnlId)
 }
 
+const TIPOLOGIA_PRIORITY = ['testo definitivo', 'accordo di rinnovo']
+
+function parseItalianDate(s: string): number {
+  if (!s) return 0
+  const [d, m, y] = s.split('/')
+  const nd = parseInt(d, 10)
+  const nm = parseInt(m, 10)
+  const ny = parseInt(y, 10)
+  if (!nd || !nm || !ny) return 0
+  return new Date(ny, nm - 1, nd).getTime()
+}
+
+/**
+ * Returns the most authoritative PDF link for a CCNL: prefers the most recent
+ * "Testo definitivo", falls back to "Accordo di rinnovo", then to the most
+ * recent accordo of any type. Returns null if no link is available.
+ */
+export function getMainPdfUrlForCCNL(ccnlId: string): string | null {
+  const candidates = accordi.filter((a) => a.ccnl_id === ccnlId && a.link)
+  if (candidates.length === 0) return null
+
+  for (const tipo of TIPOLOGIA_PRIORITY) {
+    const filtered = candidates
+      .filter((a) => a.tipologia.toLowerCase().includes(tipo))
+      .sort((a, b) => parseItalianDate(b.data_stipula) - parseItalianDate(a.data_stipula))
+    if (filtered.length > 0) return filtered[0].link
+  }
+
+  const sorted = [...candidates].sort(
+    (a, b) => parseItalianDate(b.data_stipula) - parseItalianDate(a.data_stipula),
+  )
+  return sorted[0].link
+}
+
 // ---------------------------------------------------------------------------
 // API — Guide editoriali (18 pagine)
 // ---------------------------------------------------------------------------

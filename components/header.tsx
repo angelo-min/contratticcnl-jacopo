@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { useEffect, useState, type FormEvent } from 'react'
 
 const NAV_ITEMS = [
-  { name: 'CCNL', path: '/contratti-ccnl' },
+  { name: 'CCNL', path: '/ccnl' },
   { name: 'Tabelle retributive', path: '/tabelle-retributive' },
   { name: 'Livelli', path: '/livelli' },
   { name: 'Settori', path: '/settori' },
@@ -31,7 +31,7 @@ export function Header() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const trimmed = query.trim()
-    router.push(trimmed ? `/cerca?q=${encodeURIComponent(trimmed)}` : '/contratti-ccnl')
+    router.push(trimmed ? `/cerca?q=${encodeURIComponent(trimmed)}` : '/ccnl')
   }
 
   return (
@@ -46,11 +46,11 @@ export function Header() {
       >
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <img
-            src="/icon-light-32x32.png"
+            src="/ccnl.png"
             alt=""
             width={40}
             height={40}
-            className="h-10 w-10 transition-transform group-hover:scale-105"
+            className="h-10 w-10 object-contain transition-transform group-hover:scale-105"
           />
           <span className="font-heading text-xl font-bold text-foreground hidden sm:inline">ContrattiCCNL</span>
         </Link>
