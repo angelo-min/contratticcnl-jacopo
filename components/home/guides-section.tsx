@@ -77,7 +77,7 @@ export function GuidesSection() {
                     <ChevronRight className="h-4 w-4 opacity-50" />
                   </Link>
                   
-                  {guide.preavviso && (
+                  {guide.preavviso_html && (
                     <Link
                       href={`/${slug}/preavviso`}
                       className="flex w-full items-center justify-between rounded-xl bg-muted/50 px-4 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-sm"

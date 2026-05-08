@@ -25,6 +25,55 @@ export function extractHeadings(html: string): { id: string; text: string }[] {
   return headings
 }
 
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
+export interface ParsedGuideContent {
+  body: string
+  faqItems: FaqItem[]
+}
+
+/**
+ * Splits a guide's content_html into:
+ * - body: main pillar content with the trailing FAQ + "Notizie e articoli" placeholder removed,
+ *         and any "Scarica PDF" anchor normalized to /pdf/
+ * - faqItems: parsed Q/A pairs (when an FAQ section exists)
+ */
+export function parseGuideContent(html: string): ParsedGuideContent {
+  const faqMatch = html.match(/<h3[^>]*>[^<]*(?:domand[ae]\s+frequent|\bfaq\b)[^<]*<\/h3>/i)
+  const notizieMatch = html.match(/<h3[^>]*>[^<]*notizie\s+e\s+articoli[^<]*<\/h3>/i)
+
+  const cuts: number[] = []
+  if (faqMatch?.index !== undefined) cuts.push(faqMatch.index)
+  if (notizieMatch?.index !== undefined) cuts.push(notizieMatch.index)
+  const bodyEnd = cuts.length > 0 ? Math.min(...cuts) : html.length
+
+  let body = html.substring(0, bodyEnd)
+  body = body.replace(
+    /<a\s+href="[^"]*"\s*>(\s*[Ss]carica[^<]*)<\/a>/g,
+    '<a href="/pdf/">$1</a>',
+  )
+
+  const faqItems: FaqItem[] = []
+  if (faqMatch?.index !== undefined) {
+    const after = html.substring(faqMatch.index + faqMatch[0].length)
+    const nextH2 = after.search(/<h2[^>]*>/i)
+    const region = nextH2 >= 0 ? after.substring(0, nextH2) : after
+
+    const pair = /<strong>([\s\S]*?)<\/strong>\s*<p>([\s\S]*?)<\/p>/g
+    let m: RegExpExecArray | null
+    while ((m = pair.exec(region)) !== null) {
+      const question = m[1].replace(/<[^>]+>/g, '').trim()
+      const answer = m[2].trim()
+      if (question && answer) faqItems.push({ question, answer })
+    }
+  }
+
+  return { body, faqItems }
+}
+
 export function getStatoContratto(scadenza: string): 'vigente' | 'in-rinnovo' | 'scaduto' {
   if (!scadenza) return 'vigente'
   const parts = scadenza.split('/')

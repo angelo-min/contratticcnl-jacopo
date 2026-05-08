@@ -2,15 +2,15 @@ import Link from 'next/link'
 import { SearchBar } from '@/components/search-bar'
 import { Badge } from '@/components/ui/badge'
 
-const quickTags = [
-  { label: 'Metalmeccanico', query: 'metalmeccanico' },
-  { label: 'Commercio', query: 'commercio' },
-  { label: 'Edilizia', query: 'edilizia' },
-  { label: 'Sanità', query: 'sanità' },
-  { label: 'Bancario', query: 'bancario' },
-  { label: 'Chimico', query: 'chimico' },
-  { label: 'Trasporti', query: 'trasporti' },
-  { label: 'Artigianato', query: 'artigianato' },
+const popularContracts = [
+  { label: 'Metalmeccanici', href: '/metalmeccanici' },
+  { label: 'Commercio', href: '/commercio' },
+  { label: 'Sanità', href: '/sanita' },
+  { label: 'Bancari', href: '/bancari' },
+  { label: 'Turismo', href: '/turismo' },
+  { label: 'Lavoro domestico', href: '/lavoro-domestico' },
+  { label: 'Studi professionali', href: '/studi-professionali' },
+  { label: 'Telecomunicazioni', href: '/telecomunicazioni' },
 ]
 
 export function HeroSection() {
@@ -43,15 +43,15 @@ export function HeroSection() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <span className="text-sm font-medium text-muted-foreground">Ricerche frequenti:</span>
+            <span className="text-sm font-medium text-muted-foreground">Contratti più cercati:</span>
             <div className="flex flex-wrap items-center justify-center gap-2">
-              {quickTags.map((tag) => (
-                <Link key={tag.query} href={`/contratti-ccnl?q=${encodeURIComponent(tag.query)}`}>
+              {popularContracts.map((c) => (
+                <Link key={c.href} href={c.href}>
                   <Badge
                     variant="secondary"
                     className="cursor-pointer rounded-full border border-border/50 bg-secondary/50 px-4 py-1.5 text-xs font-semibold text-foreground transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground hover:shadow-sm"
                   >
-                    {tag.label}
+                    {c.label}
                   </Badge>
                 </Link>
               ))}

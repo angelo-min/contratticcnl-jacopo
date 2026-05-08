@@ -12,8 +12,18 @@ import { GuideInfoCard } from '@/components/guide/guide-info-card'
 import { GuideToc } from '@/components/guide/guide-toc'
 import { InPageToc } from '@/components/guide/in-page-toc'
 import { RichContent } from '@/components/guide/rich-content'
+import { GuideButtonGrid } from '@/components/guide/guide-button-grid'
+import { GuidePdfCta } from '@/components/guide/guide-pdf-cta'
+import { GuideFaq } from '@/components/guide/guide-faq'
+import { GuideRelatedPosts } from '@/components/guide/guide-related-posts'
 import { BreadcrumbJsonLd } from '@/components/breadcrumb-jsonld'
-import { getStatoContratto, addHeadingIds, extractHeadings } from '@/lib/guide-utils'
+import {
+  getStatoContratto,
+  addHeadingIds,
+  extractHeadings,
+  parseGuideContent,
+} from '@/lib/guide-utils'
+import { getPostsByCategory } from '@/data/db'
 import type { CCNLGuideContent } from '@/types/ccnl'
 
 interface GuidePageProps {
@@ -30,8 +40,15 @@ export function GuidePage({ guide }: GuidePageProps) {
   const stato = getStatoContratto(guide.info.scadenza)
   const { label: statoLabel, cssVar } = STATO_CONFIG[stato]
 
-  const withIds = addHeadingIds(guide.content_html)
-  const headings = extractHeadings(withIds)
+  const { body, faqItems } = parseGuideContent(guide.content_html)
+  const withIds = addHeadingIds(body)
+  const bodyHeadings = extractHeadings(withIds)
+  const hasRelatedPosts = getPostsByCategory(guide.slug).length > 0
+  const tocHeadings = [
+    ...bodyHeadings,
+    ...(hasRelatedPosts ? [{ id: 'articoli-correlati', text: 'Notizie e articoli correlati' }] : []),
+    ...(faqItems.length > 0 ? [{ id: 'faq', text: 'Domande frequenti' }] : []),
+  ]
 
   return (
     <>
@@ -43,8 +60,7 @@ export function GuidePage({ guide }: GuidePageProps) {
         ]}
       />
       {/* Header */}
-      <div className="relative border-b border-border/50 bg-background pb-16 pt-32 overflow-hidden">
-        {/* Subtle accent blur */}
+      <div className="relative border-b border-border/50 bg-background pb-12 pt-32 overflow-hidden">
         <div className="absolute left-10 top-0 -z-10 h-[300px] w-[300px] rounded-full bg-primary/5 blur-[100px]" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
@@ -99,9 +115,7 @@ export function GuidePage({ guide }: GuidePageProps) {
               <span className="text-muted-foreground uppercase tracking-widest text-xs font-bold flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-border/80"></span>
                 CNEL{' '}
-                <span className="text-foreground ml-1">
-                  {guide.info.codice_cnel}
-                </span>
+                <span className="text-foreground ml-1">{guide.info.codice_cnel}</span>
               </span>
             )}
 
@@ -109,23 +123,31 @@ export function GuidePage({ guide }: GuidePageProps) {
               {guide.info.settore}
             </Badge>
           </div>
+
+          {/* Top: 6-button grid + PDF CTA */}
+          <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
+            <GuideButtonGrid guide={guide} hasFaq={faqItems.length > 0} />
+            <div className="lg:max-w-md">
+              <GuidePdfCta />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row">
-          {/* Main content — capped at max-w-3xl for readability */}
           <div className="min-w-0 flex-1">
             <div className="mx-auto max-w-3xl px-2 py-4">
-              <RichContent html={guide.content_html} />
+              <RichContent html={body} />
+              <GuideRelatedPosts slug={guide.slug} />
+              <GuideFaq items={faqItems} />
             </div>
           </div>
 
-          {/* Sidebar */}
           <aside className="w-full shrink-0 space-y-6 lg:sticky lg:top-24 lg:w-72 lg:self-start">
             <GuideToc guide={guide} currentSection="contenuto" />
-            {headings.length > 2 && <InPageToc headings={headings} />}
+            {tocHeadings.length > 2 && <InPageToc headings={tocHeadings} />}
             <GuideInfoCard info={guide.info} />
           </aside>
         </div>
