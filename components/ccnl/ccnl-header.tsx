@@ -14,6 +14,7 @@ import {
 import { Archive, Calendar, Users, BookOpen, Download } from 'lucide-react'
 import type { CCNL } from '@/types/ccnl'
 import { getMacrosettoreByCod, getGuideSlugByCodiceCnel, getMainPdfUrlForCCNL } from '@/data/db'
+import { DownloadPdfButton } from '@/components/ads/download-pdf-button'
 
 interface CCNLHeaderProps {
   ccnl: CCNL
@@ -118,10 +119,10 @@ export function CCNLHeader({ ccnl }: CCNLHeaderProps) {
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
             {pdfUrl && (
               <Button size="lg" asChild>
-                <a href={pdfUrl} target="_blank" rel="nofollow noopener">
+                <DownloadPdfButton pdfUrl={pdfUrl} title={ccnl.nome}>
                   <Download className="mr-2 h-5 w-5" />
                   Scarica PDF
-                </a>
+                </DownloadPdfButton>
               </Button>
             )}
             {guideSlug && (

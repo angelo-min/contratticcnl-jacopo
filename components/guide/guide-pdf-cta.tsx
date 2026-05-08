@@ -1,4 +1,5 @@
 import { Download, ArrowRight } from 'lucide-react'
+import { DownloadPdfButton } from '@/components/ads/download-pdf-button'
 
 interface GuidePdfCtaProps {
   pdfUrl: string | null
@@ -9,11 +10,10 @@ export function GuidePdfCta({ pdfUrl, title }: GuidePdfCtaProps) {
   if (!pdfUrl) return null
 
   return (
-    <a
-      href={pdfUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex items-center gap-4 rounded-2xl bg-primary px-6 py-5 text-primary-foreground shadow-sm transition-all hover:shadow-md hover:bg-primary/95"
+    <DownloadPdfButton
+      pdfUrl={pdfUrl}
+      title={title}
+      className="group flex w-full items-center gap-4 rounded-2xl bg-primary px-6 py-5 text-left text-primary-foreground shadow-sm transition-all hover:shadow-md hover:bg-primary/95"
     >
       <Download className="h-7 w-7 shrink-0" strokeWidth={1.75} aria-hidden="true" />
       <div className="flex-1">
@@ -28,6 +28,6 @@ export function GuidePdfCta({ pdfUrl, title }: GuidePdfCtaProps) {
         className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1"
         aria-hidden="true"
       />
-    </a>
+    </DownloadPdfButton>
   )
 }
