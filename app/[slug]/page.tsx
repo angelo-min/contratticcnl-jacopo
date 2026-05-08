@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
     return {
       title: `${categoryName} — Articoli CCNL | ContrattiCCNL.it`,
       description: `Articoli e approfondimenti sul CCNL ${categoryName}. Leggi tutti gli articoli del contratto.`,
+      robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
     }
   }
 

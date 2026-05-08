@@ -16,6 +16,7 @@ export interface CCNLRecord {
   settore_priv_pubb: 'privato' | 'pubblico' | 'parasubordinato'
   settori: string[]
   n_dipendenti_tot_2023: string
+  n_aziende_tot_2023?: string
 }
 
 // CCNL normalizzato per la UI
@@ -33,6 +34,7 @@ export interface CCNL {
   dirigenti: boolean
   settorePrivPubb: 'privato' | 'pubblico' | 'parasubordinato'
   nDipendenti?: string
+  nAziende?: string
 }
 
 export interface AccordoRecord {
@@ -52,6 +54,7 @@ export interface PostRecord {
   slug: string
   title: string
   content_clean: string
+  content_html: string
   excerpt: string
   date: string
   categories: { name: string; slug: string }[]

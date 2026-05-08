@@ -15,7 +15,7 @@ const popularContracts = [
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden bg-background px-4 py-20 sm:px-6 lg:px-8">
+    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden bg-background px-4 py-20 sm:px-6 lg:px-8 lg:pt-44">
       {/* Decorative asymmetric element softened */}
       <div className="absolute right-0 top-0 -z-10 h-[100vh] w-[40vw] rounded-bl-[100px] bg-secondary/30 hidden lg:block" />
 

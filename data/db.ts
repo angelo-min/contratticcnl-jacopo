@@ -154,6 +154,7 @@ function normalizeCCNL(record: CCNLRecord): CCNL {
     dirigenti: record.dirigenti,
     settorePrivPubb: record.settore_priv_pubb,
     nDipendenti: record.n_dipendenti_tot_2023 || undefined,
+    nAziende: record.n_aziende_tot_2023 || undefined,
   }
 }
 

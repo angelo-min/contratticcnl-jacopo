@@ -5,7 +5,6 @@ import {
   getAllGuideSlugs,
   getCCNLGuide,
   getAllPosts,
-  getAllCategories,
 } from '@/data/db'
 
 const BASE_URL = 'https://www.contratticcnl.it'
@@ -91,13 +90,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  // Categorie blog
-  const categoryPages: MetadataRoute.Sitemap = getAllCategories().map((cat) => ({
-    url: `${BASE_URL}/articoli/${cat.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  }))
+  // Le pagine categoria (/articoli/<slug>) sono noindex per scelta SEO,
+  // quindi non le includiamo nella sitemap. Gli articoli singoli restano
+  // indicizzabili tramite postPages.
 
   // 112 blog post
   const postPages: MetadataRoute.Sitemap = getAllPosts().map((post) => {
@@ -118,7 +113,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...guidePages,
     ...ccnlPages,
     ...settorePages,
-    ...categoryPages,
     ...postPages,
   ]
 }

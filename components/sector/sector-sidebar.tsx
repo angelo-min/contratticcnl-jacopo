@@ -10,7 +10,7 @@ interface SectorSidebarProps {
 
 const externalLinks = [
   { name: 'INPS', url: 'https://www.inps.it' },
-  { name: 'Archivio CNEL', url: 'https://www.cnel.it/Archivio-Contratti' },
+  { name: 'Archivio CNEL', url: 'https://www.cnel.it/Archivio-Contratti-Collettivi/Entra-nellarchivio' },
   { name: 'Ministero del Lavoro', url: 'https://www.lavoro.gov.it' },
   { name: 'INAIL', url: 'https://www.inail.it' },
 ]
@@ -21,7 +21,7 @@ export function SectorSidebar({ currentSlug }: SectorSidebarProps) {
   return (
     <div className="space-y-6">
       {/* Other sectors */}
-      <Card className="sticky top-24">
+      <Card>
         <CardHeader>
           <CardTitle className="font-heading text-lg font-bold">Altri settori</CardTitle>
         </CardHeader>
@@ -37,7 +37,7 @@ export function SectorSidebar({ currentSlug }: SectorSidebarProps) {
             </Link>
           ))}
           <Link
-            href="/#settori"
+            href="/settori"
             className="mt-4 block text-center text-sm font-medium text-primary hover:underline"
           >
             Vedi tutti i settori
@@ -56,7 +56,7 @@ export function SectorSidebar({ currentSlug }: SectorSidebarProps) {
               key={link.name}
               href={link.url}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener"
               className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
               <span>{link.name}</span>
