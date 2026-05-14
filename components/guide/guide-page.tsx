@@ -127,10 +127,10 @@ export function GuidePage({ guide }: GuidePageProps) {
           </div>
 
           {/* Top: 6-button grid + PDF CTA */}
-          <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-stretch">
             <GuideButtonGrid guide={guide} hasFaq={faqItems.length > 0} />
             {pdfUrl && (
-              <div className="lg:max-w-md">
+              <div className="flex lg:max-w-md">
                 <GuidePdfCta pdfUrl={pdfUrl} title={guide.title} />
               </div>
             )}
