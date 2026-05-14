@@ -4,13 +4,13 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { PostCard } from '@/components/blog/post-card'
 import { Badge } from '@/components/ui/badge'
-import { PaginationControls } from '@/components/articoli/pagination-controls'
+import { LoadMoreButton } from '@/components/articoli/load-more-button'
 import { getPostsByCategory, getAllCategories } from '@/data/db'
 import type { Metadata } from 'next'
 
 export const revalidate = 86400
 
-const PER_PAGE = 12
+const PER_PAGE = 9
 
 interface Props {
   params: Promise<{ categoria: string }>
@@ -59,8 +59,12 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
 
   const totalPages = Math.max(1, Math.ceil(allPosts.length / PER_PAGE))
   const currentPage = Math.min(totalPages, Math.max(1, parseInt(sp.pag || '1', 10) || 1))
-  const start = (currentPage - 1) * PER_PAGE
-  const pagePosts = allPosts.slice(start, start + PER_PAGE)
+  // Cumulative slice: ogni pagina contiene N*PER_PAGE post (non solo gli ultimi 9).
+  // Pattern SEO-safe: senza JS la navigazione "Carica altri" porta a /?pag=N+1
+  // che mostra cumulativamente più post; con JS Next.js fa soft navigation e
+  // appende i nuovi mantenendo scroll.
+  const visiblePosts = allPosts.slice(0, currentPage * PER_PAGE)
+  const hasMore = currentPage < totalPages
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -72,9 +76,7 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
               {categoryName}
             </h1>
             <p className="mt-2 text-muted-foreground">
-              {totalPages > 1
-                ? `Pagina ${currentPage} di ${totalPages} — ${allPosts.length} articoli`
-                : `${allPosts.length} ${allPosts.length === 1 ? 'articolo' : 'articoli'}`}
+              {allPosts.length === 1 ? '1 articolo' : `${allPosts.length} articoli`}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -102,16 +104,14 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
 
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {pagePosts.map((post) => (
+            {visiblePosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
 
-          <PaginationControls
-            currentPage={currentPage}
-            totalPages={totalPages}
-            buildHref={(p) => buildPageUrl(categoria, p)}
-          />
+          {hasMore && (
+            <LoadMoreButton href={buildPageUrl(categoria, currentPage + 1)} />
+          )}
         </div>
       </main>
       <Footer />

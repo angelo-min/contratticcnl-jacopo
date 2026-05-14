@@ -3,13 +3,13 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { PostCard } from '@/components/blog/post-card'
 import { Badge } from '@/components/ui/badge'
-import { PaginationControls } from '@/components/articoli/pagination-controls'
+import { LoadMoreButton } from '@/components/articoli/load-more-button'
 import { getAllPosts, getAllCategories } from '@/data/db'
 import type { Metadata } from 'next'
 
 export const revalidate = 86400
 
-const PER_PAGE = 12
+const PER_PAGE = 9
 
 interface PageProps {
   searchParams: Promise<{ pag?: string }>
@@ -40,8 +40,9 @@ export default async function ArticoliPage({ searchParams }: PageProps) {
 
   const totalPages = Math.max(1, Math.ceil(allPosts.length / PER_PAGE))
   const currentPage = Math.min(totalPages, Math.max(1, parseInt(sp.pag || '1', 10) || 1))
-  const start = (currentPage - 1) * PER_PAGE
-  const pagePosts = allPosts.slice(start, start + PER_PAGE)
+  // Cumulative slice (vedi commento in /articoli/[categoria]/page.tsx).
+  const visiblePosts = allPosts.slice(0, currentPage * PER_PAGE)
+  const hasMore = currentPage < totalPages
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -53,9 +54,7 @@ export default async function ArticoliPage({ searchParams }: PageProps) {
               Articoli
             </h1>
             <p className="mt-2 text-muted-foreground">
-              {totalPages > 1
-                ? `Pagina ${currentPage} di ${totalPages} — ${allPosts.length} articoli di approfondimento sui CCNL`
-                : `${allPosts.length} articoli di approfondimento sui CCNL`}
+              {allPosts.length} articoli di approfondimento sui CCNL
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -75,16 +74,12 @@ export default async function ArticoliPage({ searchParams }: PageProps) {
 
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {pagePosts.map((post) => (
+            {visiblePosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
 
-          <PaginationControls
-            currentPage={currentPage}
-            totalPages={totalPages}
-            buildHref={buildPageUrl}
-          />
+          {hasMore && <LoadMoreButton href={buildPageUrl(currentPage + 1)} />}
         </div>
       </main>
       <Footer />
