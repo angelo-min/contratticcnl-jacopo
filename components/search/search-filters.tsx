@@ -1,12 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { ChevronDown } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { macrosettori } from '@/data/db'
+import { cn } from '@/lib/utils'
 import type { CCNLStatus } from '@/types/ccnl'
 
 interface SearchFiltersProps {
@@ -22,6 +25,7 @@ const statusOptions: { value: CCNLStatus; label: string }[] = [
 export function SearchFilters({ selectedSectors, selectedStatuses }: SearchFiltersProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const updateFilters = (type: 'sector' | 'status', value: string, checked: boolean) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -47,20 +51,70 @@ export function SearchFilters({ selectedSectors, selectedStatuses }: SearchFilte
   }
 
   const hasFilters = selectedSectors.length > 0 || selectedStatuses.length > 0
+  const activeCount = selectedSectors.length + selectedStatuses.length
 
   return (
-    <Card className="sticky top-24">
-      <CardHeader className="pb-4">
+    <Card className="lg:sticky lg:top-24">
+      {/* Mobile toggle */}
+      <button
+        type="button"
+        onClick={() => setMobileOpen((v) => !v)}
+        aria-expanded={mobileOpen}
+        aria-controls="filtri-content"
+        className="flex w-full items-center justify-between gap-3 px-6 py-4 lg:hidden"
+      >
+        <span className="flex items-center gap-2 font-heading text-lg font-bold">
+          Filtri
+          {hasFilters && (
+            <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-bold text-primary-foreground">
+              {activeCount}
+            </span>
+          )}
+        </span>
+        <ChevronDown
+          className={cn(
+            'h-5 w-5 text-muted-foreground transition-transform',
+            mobileOpen && 'rotate-180',
+          )}
+        />
+      </button>
+
+      {/* Desktop header */}
+      <CardHeader className="hidden pb-4 lg:block">
         <div className="flex items-center justify-between">
           <CardTitle className="font-heading text-lg font-bold">Filtri</CardTitle>
           {hasFilters && (
-            <Button variant="ghost" size="sm" onClick={clearFilters} className="h-auto p-0 text-sm text-primary">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearFilters}
+              className="h-auto p-0 text-sm text-primary"
+            >
               Cancella filtri
             </Button>
           )}
         </div>
       </CardHeader>
-      <CardContent className="space-y-6">
+
+      <CardContent
+        id="filtri-content"
+        className={cn(
+          'space-y-6 lg:block',
+          mobileOpen ? 'block' : 'hidden',
+        )}
+      >
+        {/* Clear button on mobile (top of expanded content) */}
+        {hasFilters && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearFilters}
+            className="h-auto p-0 text-sm text-primary lg:hidden"
+          >
+            Cancella filtri
+          </Button>
+        )}
+
         {/* Macrosettore filter */}
         <div>
           <h4 className="mb-3 text-sm font-medium text-foreground">Macrosettore</h4>
@@ -70,9 +124,14 @@ export function SearchFilters({ selectedSectors, selectedStatuses }: SearchFilte
                 <Checkbox
                   id={`sector-${sector.slug}`}
                   checked={selectedSectors.includes(sector.cod)}
-                  onCheckedChange={(checked) => updateFilters('sector', sector.cod, checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    updateFilters('sector', sector.cod, checked as boolean)
+                  }
                 />
-                <Label htmlFor={`sector-${sector.slug}`} className="cursor-pointer text-sm text-muted-foreground">
+                <Label
+                  htmlFor={`sector-${sector.slug}`}
+                  className="cursor-pointer text-sm text-muted-foreground"
+                >
                   {sector.nome} ({sector.numeroContratti})
                 </Label>
               </div>
@@ -91,9 +150,14 @@ export function SearchFilters({ selectedSectors, selectedStatuses }: SearchFilte
                 <Checkbox
                   id={`status-${status.value}`}
                   checked={selectedStatuses.includes(status.value)}
-                  onCheckedChange={(checked) => updateFilters('status', status.value, checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    updateFilters('status', status.value, checked as boolean)
+                  }
                 />
-                <Label htmlFor={`status-${status.value}`} className="cursor-pointer text-sm text-muted-foreground">
+                <Label
+                  htmlFor={`status-${status.value}`}
+                  className="cursor-pointer text-sm text-muted-foreground"
+                >
                   {status.label}
                 </Label>
               </div>
