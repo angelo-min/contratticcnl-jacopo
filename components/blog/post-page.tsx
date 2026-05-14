@@ -39,7 +39,7 @@ export function PostPage({ post }: PostPageProps) {
       />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-card">
-        <div className="mx-auto max-w-3xl px-4 py-4 sm:px-6">
+        <div className="mx-auto max-w-3xl px-4 pb-4 pt-28 sm:px-6">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
