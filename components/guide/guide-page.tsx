@@ -150,6 +150,11 @@ export function GuidePage({ guide }: GuidePageProps) {
               <RichContent html={body} />
               <GuideRelatedPosts slug={guide.slug} />
               <GuideFaq items={faqItems} />
+              {pdfUrl && (
+                <div className="mt-16">
+                  <GuidePdfCta pdfUrl={pdfUrl} title={guide.title} />
+                </div>
+              )}
             </div>
           </div>
 
